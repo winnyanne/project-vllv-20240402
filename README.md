@@ -13,9 +13,8 @@
 - jQuery v3.7.1
   
 後端：
-- Bootstrap v5.1.3
-- Chart.js v4.4.2
-- jQuery v3.7.1
+- PHP
+- SQL
   
 資料庫：
 - MySQL
