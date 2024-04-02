@@ -9,10 +9,10 @@
     </p>
     <table border: none;>
         <tr>
-            <td><img src="S-1.png" alt="" style="width: 100px;"></td>
-            <td><img src="S-2.png" alt="" style="width: 100px;"></td>
-            <td><img src="S-3.png" alt="" style="width: 100px;"></td>
-            <td><img src="S-4.png" alt="" style="width: 100px;"></td>
+            <td><img src="https://winnyanne.github.io/project-vllv-20240402/HW-0104-MovingPictures/images/01.png" alt="" style="width: 100px;"></td>
+            <td><img src="https://winnyanne.github.io/project-vllv-20240402/HW-0104-MovingPictures/images/02.png" alt="" style="width: 100px;"></td>
+            <td><img src="https://winnyanne.github.io/project-vllv-20240402/HW-0104-MovingPictures/images/03.png" alt="" style="width: 100px;"></td>
+            <td><img src="https://winnyanne.github.io/project-vllv-20240402/HW-0104-MovingPictures/images/04.png" alt="" style="width: 100px;"></td>
         </tr>
     </table>
     <p class="text-bg-primary">
