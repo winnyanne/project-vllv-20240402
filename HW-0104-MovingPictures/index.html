@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animate & Wow</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/myall.css">
+</head>
+<style>
+    .page_header {
+        background-color: #ffff00;
+        vertical-align: middle;
+        margin-top: 0px;
+        margin-bottom: 20px;
+        height: 100px;
+    }
+    .page_header p {
+        font-size: 30px;
+        font-weight: 900;
+        padding-top: 35px;
+        padding-bottom: 35x;
+        color: #8000ff;
+    }
+</style>
+<body>
+    <section>   <!-- 以 跑馬燈 呈現 本頁主題 -->
+    <!--    
+    HTML marquee 跑馬燈可用的參數如下
+    方向設定 : direction="參數值"；可設定 up（向上）、dun（向下）、left（向左）、right（向右）。
+    對齊設定 : align="參數值"；可設定 top（向上對齊）、midden（垂直至中）、botton（向下對齊）。
+    速度設定 : scrollamount="參數值" ；可設定為數字，通常設定 1~10 的範圍，數字越大跑得越快。
+    長度設定 : height="參數值"；數字，自行設定。
+    寬度設定 : width="參數值"；數字，自行設定。
+    行為設定 : behavior="參數值"；可設定 alternate（來回跑）、slide（跑入後停止）。
+    背景顏色 : bgcolor="參數值"；可設定為顏色的色碼，不設定則沒有顏色。
+    HTML marquee 跑馬燈範例
+    <marquee direction="right" height="30" scrollamount="5" behavior="alternate">跑馬燈測試</marquee>
+    -->        
+        <div class="page_header">
+            <p><marquee direction="left" scrollamount="20" behavior="left">
+            動畫應用&emsp;by&emsp;Animate & Wow&emsp;of&emsp;鄭婉儀 的 作品集&emsp;@&emsp;Winnyanne's 虛擬主機 IP : 192.168.10.68</marquee></p>
+        </div>
+    </section>
+
+    <section>   <!-- 以表格方式 呈現 動畫 -->
+        <table border="0" align=center width="80%" height="300px">
+            <tr>
+                <td>
+                    <div class="text-center"><i class="fa-solid fa-star fa-8x wow animate__flash"
+                        data-wow-duration="1s" data-wow-delay="0s" data-wow-iteration="infinite" style="color:yellow;"></i></div>
+                </td>
+                <td>
+                    <div class="text-center"><i class="fa-solid fa-heart-pulse fa-8x text-danger wow animate__heartBeat"
+                        data-wow-duration="2s" data-wow-delay="2s" data-wow-iteration="infinite"></i></div>
+                </td>
+                <td>
+                    <div class="text-center"><i class="fa-solid fa-handshake-angle fa-8x wow animate__swing"
+                        data-wow-duration="2s" data-wow-delay="4s" data-wow-iteration="infinite" style="color:orange;"></i></div>
+                </td>
+                <td>
+                    <div class="text-center"><i class="fa-solid fa-image fa-8x text-primary wow animate__shakeX"
+                        data-wow-duration="2s" data-wow-delay="6s" data-wow-iteration="infinite"></i></div>
+                </td>
+                <td>
+                    <div class="text-center"><i class="fa-brands fa-tiktok fa-8x text-success wow animate__shakeY"
+                        data-wow-duration="2s" data-wow-delay="8s" data-wow-iteration="infinite"></i></div>
+                </td>
+        </table>
+    </section>
+
+    <section>   <!-- 10 輛 小車 順序 離場 -->
+        <table border="0" align="center" width="80%" height="100px" font-size="5"> 
+            <tr>    <!-- 通常：動畫的動作結束後 會再回到 第一圖的狀態。style="animation-fill-mode:forwards;" 是讓 動畫的動作結束後 停留在 最後一圖的狀態。 -->
+                <td><div class="text-left"><i class="fa-solid fa-car-side fa-8x text-success wow animate__bounceOutRight"
+                    data-wow-duration="8s" data-wow-delay="10s" data-wow-iteration="1" style="animation-fill-mode:forwards;"></i></div></td>
+                <td><div class="text-left"><i class="fa-solid fa-car-side fa-8x text-success wow animate__bounceOutRight"
+                    data-wow-duration="8s" data-wow-delay="9.5s" data-wow-iteration="1" style="animation-fill-mode:forwards;"></i></div></td>
+                <td><div class="text-left"><i class="fa-solid fa-car-side fa-8x text-success wow animate__bounceOutRight"
+                    data-wow-duration="8s" data-wow-delay="9s" data-wow-iteration="1" style="animation-fill-mode:forwards;"></i></div></td>
+                <td><div class="text-left"><i class="fa-solid fa-car-side fa-8x text-success wow animate__bounceOutRight"
+                    data-wow-duration="7s" data-wow-delay="9s" data-wow-iteration="1" style="animation-fill-mode:forwards;"></i></div></td>
+                <td><div class="text-left"><i class="fa-solid fa-car-side fa-8x text-success wow animate__bounceOutRight"
+                    data-wow-duration="6s" data-wow-delay="9s" data-wow-iteration="1" style="animation-fill-mode:forwards;"></i></div></td>
+                <td><div class="text-left"><i class="fa-solid fa-car-side fa-8x text-success wow animate__bounceOutRight"
+                    data-wow-duration="5s" data-wow-delay="9s" data-wow-iteration="1" style="animation-fill-mode:forwards;"></i></div></td>
+                <td><div class="text-left"><i class="fa-solid fa-car-side fa-8x text-success wow animate__bounceOutRight"
+                    data-wow-duration="4s" data-wow-delay="9s" data-wow-iteration="1" style="animation-fill-mode:forwards;"></i></div></td>
+                <td><div class="text-left"><i class="fa-solid fa-car-side fa-8x text-success wow animate__bounceOutRight"
+                    data-wow-duration="3s" data-wow-delay="9s" data-wow-iteration="1" style="animation-fill-mode:forwards;"></i></div></td>
+                <td><div class="text-left"><i class="fa-solid fa-car-side fa-8x text-success wow animate__bounceOutRight"
+                    data-wow-duration="2s" data-wow-delay="9s" data-wow-iteration="1" style="animation-fill-mode:forwards;"></i></div></td>
+                <td><div class="text-left"><i class="fa-solid fa-car-side fa-8x text-success wow animate__bounceOutRight"
+                    data-wow-duration="1s" data-wow-delay="9s" data-wow-iteration="1" style="animation-fill-mode:forwards;"></i></div></td>
+            </tr>
+        </table>
+    </section>
+
+    <section>   <!-- 10 顆 籃球 順序 進場 -->
+        <table border="0" align="center" width="80%" height="200px">
+            <tr>
+                <td><div class="text-left"><i class="fa-solid fa-basketball fa-8x text-danger wow animate__backInRight"
+                    data-wow-duration="1s" data-wow-delay="0s" data-wow-iteration="1"></i></div></td>
+                <td><div class="text-left"><i class="fa-solid fa-basketball fa-8x text-danger wow animate__backInRight"
+                    data-wow-duration="2s" data-wow-delay="0s" data-wow-iteration="1"></i></div></td>
+                <td><div class="text-left"><i class="fa-solid fa-basketball fa-8x text-danger wow animate__backInRight"
+                    data-wow-duration="3s" data-wow-delay="0s" data-wow-iteration="1"></i></div></td>
+                <td><div class="text-left"><i class="fa-solid fa-basketball fa-8x text-danger wow animate__backInRight"
+                    data-wow-duration="4s" data-wow-delay="0s" data-wow-iteration="1"></i></div></td>
+                <td><div class="text-left"><i class="fa-solid fa-basketball fa-8x text-danger wow animate__backInRight"
+                    data-wow-duration="5s" data-wow-delay="0s" data-wow-iteration="1"></i></div></td>
+                <td><div class="text-left"><i class="fa-solid fa-basketball fa-8x text-danger wow animate__backInRight"
+                    data-wow-duration="6s" data-wow-delay="0s" data-wow-iteration="1"></i></div></td>
+                <td><div class="text-left"><i class="fa-solid fa-basketball fa-8x text-danger wow animate__backInRight"
+                    data-wow-duration="7s" data-wow-delay="0s" data-wow-iteration="1"></i></div></td>
+                <td><div class="text-left"><i class="fa-solid fa-basketball fa-8x text-danger wow animate__backInRight"
+                    data-wow-duration="8s" data-wow-delay="0s" data-wow-iteration="1"></i></div></td>
+                <td><div class="text-left"><i class="fa-solid fa-basketball fa-8x text-danger wow animate__backInRight"
+                    data-wow-duration="9s" data-wow-delay="0s" data-wow-iteration="1"></i></div></td>
+                <td><div class="text-left"><i class="fa-solid fa-basketball fa-8x text-danger wow animate__backInRight"
+                    data-wow-duration="10s" data-wow-delay="0s" data-wow-iteration="1"></i></div></td>
+            </tr>
+        </table>
+    </section>
+<!-- 
+    Attention seekers :         Back entrances :            Bouncing entrances :        Rotating entrances :
+        animate__bounce             animate__backInDown         animate__bounceIn           animate__rotateIn      
+        animate__flash              animate__backInLeft         animate__bounceInDown       animate__rotateInDownLeft  
+        animate__pulse              animate__backInRight        animate__bounceInLeft       animate__rotateInDownRight  
+        animate__rubberBand         animate__backInUp           animate__bounceInRight      animate__rotateInUpLeft 
+        animate__shakeX                                         animate__bounceInUp         animate__rotateInUpRight             
+        animate__shakeY                                                    
+        animate__headShake      Back exits :                Bouncing exits :            Rotating exits :          
+        animate__swing              animate__backOutDown        animate__bounceOut          animate__rotateOut     
+        animate__tada               animate__backOutLeft        animate__bounceOutDown      animate__rotateOutDownLeft 
+        animate__wobble             animate__backOutRigh        animate__bounceOutLeft      animate__rotateOutDownRight
+        animate__jello              animate__backOutUp          animate__bounceOutRight     animate__rotateOutUpLeft
+        animate__heartBeat                                      animate__bounceOutUp        animate__rotateOutUpRight   
+                                                                                            
+    Fading entrances :              Fading exits :                  Flippers :              Specials :
+        animate__fadeIn                 animate__fadeOut                animate__flip           animate__hinge
+        animate__fadeInDown             animate__fadeOutDown            animate__flipInX        animate__jackInTheBox
+        animate__fadeInDownBig          animate__fadeOutDownBig         animate__flipInY        animate__rollIn
+        animate__fadeInLeft             animate__fadeOutLeft            animate__flipOutX       animate__rollOut
+        animate__fadeInLeftBig          animate__fadeOutLeftBig         animate__flipOutY
+        animate__fadeInRight            animate__fadeOutRight
+        animate__fadeInRightBig         animate__fadeOutRightBig    Lightspeed :
+        animate__fadeInUp               animate__fadeOutUp              animate__lightSpeedInRight
+        animate__fadeInUpBig            animate__fadeOutUpBig           animate__lightSpeedInLeft
+        animate__fadeInTopLeft          animate__fadeOutTopLeft         animate__lightSpeedOutRight
+        animate__fadeInTopRight         animate__fadeOutTopRight        animate__lightSpeedOutLeft
+        animate__fadeInBottomLeft       animate__fadeOutBottomRight
+        animate__fadeInBottomRight      animate__fadeOutBottomLeft
+
+    Zooming entrances :         Zooming exits :             Sliding entrances :         Sliding exits :     
+        animate__zoomIn             animate__zoomOut            animate__slideInDown        animate__slideOutDown
+        animate__zoomInDown         animate__zoomOut            animate__slideInLeft        animate__slideOutLeft
+        animate__zoomInLeft         animate__zoomOutLeft        animate__slideInRight       animate__slideOutRight
+        animate__zoomInRight        animate__zoomOutRight       animate__slideInUp          animate__slideOutUp
+        animate__zoomInRight        animate__zoomOutUp
+-->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script>new WOW().init();</script>
+
+    <!--  以下 由 openAI 提供：幻燈片 為基底 + 動畫  -->
+    <script>
+        const images = document.querySelectorAll('.slideshow img'); let currentIndex = 0; setInterval(() => {
+            images.forEach(image => { image.style.display = 'none'; });
+            currentIndex = (currentIndex + 1) % images.length; images[currentIndex].style.display = 'block';
+        }, 2000);    //  2000 毫秒 = 2 秒
+    </script>
+
+    <script>
+        $('.my-element').addClass('wow fadeIn');
+        new WOW().init();
+        setTimeout(function () { $('.my-element').removeClass('fadeIn').addClass('wow bounce'); new WOW().init(); }, 2000);
+    </script>
+</body>
+</html>
