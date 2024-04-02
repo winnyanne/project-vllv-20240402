@@ -4,11 +4,12 @@
 ![範例圖片 2](/project-VLLV/ReadMe-imgs/ReadMe-2.png)
 ![範例圖片 3](/project-VLLV/ReadMe-imgs/ReadMe-3.png)
 
-## 專案技術
+## 專案相關
 
 前端：
-- Bootstrap v5.1.3
-- Chart.js v4.4.2
+- Bootstrap
+- Chart.js
+- HTML5
 - jQuery v3.7.1
   
 後端：
