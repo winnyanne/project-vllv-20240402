@@ -24,6 +24,5 @@
 ## 聯絡作者
 
 您可以透過以下方式與我聯絡
-
-- [e-mail]cloud2winnyanne@gmail.com
+- [e-mail] cloud2winnyanne@gmail.com
 
