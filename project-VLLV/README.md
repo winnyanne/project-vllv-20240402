@@ -10,12 +10,9 @@
 ## 專案技術
 
 - Node.js v16.15.0
-- Vue v3.2.20
 - Vite v4.0.4
-- Vue Router v4.0.11
 - Axios v0.24.0
 - Bootstrap v5.1.3
-...
 
 
 ## 功能簡介
@@ -27,13 +24,6 @@
 - 編譯程式碼
 - 執行 ESLint 掃描
 - 執行測試
-...
-
-## 第三方服務
-
-- Algolia
-- Google Analytics
-...
 
 ## 聯絡作者
 
@@ -42,7 +32,4 @@
 你可以透過以下方式與我聯絡
 
 - [e-mail](cloud2winnyanne@gmail.com)
-- [Facebook](https://www.facebook.com/XXXX)
-- [Instagram](https://www.instagram.com/XXXX/)
-...
 
