@@ -23,9 +23,7 @@
 
 ## 聯絡作者
 
-> ps. 這邊絕對不是業配，而是要適當提供一些方式讓觀看者知道你的聯絡方式，讓他們可以更方便的找到你。
+您可以透過以下方式與我聯絡
 
-你可以透過以下方式與我聯絡
-
-- [e-mail](cloud2winnyanne@gmail.com)
+- [e-mail]cloud2winnyanne@gmail.com
 
