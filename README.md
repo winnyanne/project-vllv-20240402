@@ -1,7 +1,4 @@
-
 ## 畫面
-
-> 可提供 1~3 張圖片，讓觀看者透過 README 了解整體畫面
 
 ![範例圖片 1](/project-VLLV/ReadMe-imgs/ReadMe-1.png)
 ![範例圖片 2](/project-VLLV/ReadMe-imgs/ReadMe-2.png)
@@ -13,7 +10,6 @@
 - Vite v4.0.4
 - Axios v0.24.0
 - Bootstrap v5.1.3
-
 
 ## 功能簡介
 
