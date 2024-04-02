@@ -1,0 +1,162 @@
+  :root {
+    --my-navbar-bg: #d7c4bb;//navbar的背景色(.my-navbar)
+    
+    --my-navbar-list-bg:rgba(0,0,0,.5);//收合時列表的背景色(.my-navbar__collapse)
+    --my-navbar-text-color: white;//列表收合時的字體顏色
+    --my-navbar-text-hover-color:black;//列表收合時hover的字體顏色
+    --my-navbar-expand-text-color: black;//列表展開時的字體顏色
+    
+    --my-navbar-list-hover:pink;
+  }
+  
+  .my-navbar {
+    position: sticky !important;
+    top: 0;
+    z-index: 1;
+    display:flex;
+    min-height: 50px;
+    background: var(--my-navbar-bg);
+    * {
+      color: var(--my-navbar-text-color);
+    }
+    &__brand {
+      display: flex;
+      align-items: center;
+    }
+    &__toggler {
+      min-width: 60px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      row-gap: 8px;
+      cursor: pointer;
+      span {
+        display: block;
+        background-color: black;
+        width: 70%;
+        height: 4px;
+        border-radius: 5px;
+        &:first-of-type,
+        &:last-of-type {
+          transition: translate 0.5s cubic-bezier(0.57, -0.41, 0.53, 1.45) 0s,
+            width 0.5s cubic-bezier(0.57, -0.41, 0.53, 1.45) 0s;
+        }
+        &:nth-of-type(2),
+        &:nth-of-type(3) {
+          transition: rotate 0.2s cubic-bezier(0.57, -0.41, 0.53, 1.45) 0.2s;
+        }
+        &:nth-of-type(3) {
+          position: absolute;
+        }
+      }
+      &:has([type="checkbox"]:checked) {
+        span:first-of-type {
+          translate: 0 12px;
+          width: 0;
+        }
+        span:last-of-type {
+          translate: 0 -12px;
+          width: 0;
+        }
+        span:nth-of-type(2) {
+          rotate: 45deg;
+        }
+        span:nth-of-type(3) {
+          rotate: -45deg;
+        }
+      }
+    }
+    &__collapse {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.5s ease-in-out;
+      position: absolute;
+      z-index: 1;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: var(--my-navbar-list-bg);
+      ul {
+        overflow: hidden;
+        li {
+          display: flex;
+          flex-direction: column;
+          border-bottom: 1px dashed white;
+          a {
+            display: flex;
+            align-items: center;
+            min-height: 42px;
+            padding-left: 1rem;
+            @media (hover: hover) {
+              &:hover {
+                background: var(--my-navbar-list-hover);
+                color:var(--my-navbar-text-hover-color);
+              }
+            }
+          }
+        }
+      }
+    }
+    &:has(.my-navbar__toggler [type="checkbox"]:checked) .my-navbar__collapse {
+      grid-template-rows: 1fr;
+    }
+  }
+  
+  @mixin navbar__expand {
+    .my-navbar__toggler {
+      display: none;
+    }
+    .my-navbar__collapse {
+      position: static;
+      grid-template-rows: 1fr;
+      transition: unset;
+      background-color: unset;
+      ul {
+        display: flex;
+        column-gap: 25px;
+        li {
+          flex-direction: row;
+          border: none;
+          a {
+            padding: unset;
+            min-height: 0;
+            color:var(--my-navbar-expand-text-color);
+            @media (hover: hover) {
+              &:hover {
+                background: unset;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  //斷點
+  @media screen and (min-width: 576px) {
+    .my-navbar__expand--sm {
+      @include navbar__expand;
+    }
+  }
+  @media screen and (min-width: 768px) {
+    .my-navbar__expand--md {
+      @include navbar__expand;
+    }
+  }
+  @media screen and (min-width: 992px) {
+    .my-navbar__expand--lg {
+      @include navbar__expand;
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    .my-navbar__expand--xl {
+      @include navbar__expand;
+    }
+  }
+  @media screen and (min-width: 1400px) {
+    .my-navbar__expand--xxl {
+      @include navbar__expand;
+    }
+  }
+  

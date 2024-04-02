@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Noto+Sans+TC:wght@100;200;300;400;500;600;700;800;900&family=Zen+Maru+Gothic:wght@300;400;500;700;900&display=swap');
+/*  cg：color group 
+    白-->   灰：0~F     cg0g：black
+            紅：0~F     cg1r：red
+            橙：0~F     cg2o：orange
+            黃：0~F     cg3y：yellow
+            綠：0~F     cg4g：green
+            藍：0~F     cg5b：blue
+            靛：0~F     cg6i：indigo
+            紫：0~F     cg7p：purple
+            棕：0~F     cg8b：brown
+          透明：0~F     cg9t：transparent
+*/
+:root {
+    --cg0g0: #fff; 
+    --cg0g1: #ddd; 
+    --cg0g2: #bbb; 
+    --cg0g3: #999; 
+    --cg0g4: #777; 
+    --cg0g5: #666; 
+    --cg0g6: #555; 
+    --cg0g7: #444; 
+    --cg0g8: #222; 
+    --cg0g9: #000; 
+
+    --cg1r0: #fcd3d1; 
+    --cg1r1: #fed5d9; 
+    --cg1r2: #ffc2c3; 
+    --cg1r3: #e3a6a1;    
+    --cg1r4: #fe929f;     
+    --cg1r5: #fe7773;
+    --cg1r6: #fe5858; 
+    --cg1r7: #ed0f0f; 
+    --cg1r8: #fe040d; 
+    --cg1r9: #bc5f6a; 
+    --cg1rA: #ae4951; 
+    --cg1rB: #9a1b27; 
+    --cg1rC: #7e212c; 
+
+    --cg2o3: #FCD6B6;     
+    --cg2o8: #da7373;
+    --cg2oA: #B96262;
+
+    --cg3y1: #e4dace;
+    --cg2y5: #ebc57c;      
+    --cg3y6: #f2dd66;
+    --cg3y7: #ffd954;           
+    --cg3y8: #e5bb4b;    
+    --cg3y9: #f2ab39; 
+
+    --mycolor01: #d3b7d8;
+    --mycolor02: #FBF;
+    --mycolor03: #A13E97;
+    --mycolor04: #692A7E;
+    --mycolor05: #6B0808;
+    --mycolor06: #280E1B;
+
+    --cg9t0: rgba(0, 0, 0, .1);
+    --cg9t1: rgba(0, 0, 0, .2);  
+    --cg9t2: rgba(0, 0, 0, .3);  
+    --cg9t3: rgba(0, 0, 0, .4);  
+    --cg9t4: rgba(0, 0, 0, .5);  
+    --cg9t5: rgba(0, 0, 0, .6);  
+    --cg9t6: rgba(0, 0, 0, .7);  
+    --cg9t7: rgba(0, 0, 0, .8);  
+    --cg9t8: rgba(0, 0, 0, .9);  
+    --cg9t9: rgba(0, 0, 0, .99);  
+
+    @import url('https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Noto+Sans+TC:wght@100;200;300;400;500;600;700;800;900&family=Zen+Maru+Gothic:wght@300;400;500;700;900&display=swap');
+/*   mcg：  my color group
+      黑    mcg0b：black
+      紅    mcg1r：red
+      橙    mcg2o：orange
+      黃    mcg3y：yellow
+      綠    mcg4g：green
+      藍    mcg5b：blue
+      藍    mcg6b：blue more
+      紫    mcg7p：purple
+      栗    mcg8m：maroon
+      透明  mcg9t：transparent
+*/
+:root {
+    --mcg0b0: #000;         --mcg1r0: #FF0000;      --mcg2o0: #C06000;      --mcg3y0: #FFFACD;
+    --mcg0b1: #111;         --mcg1r1: #FF3333;      --mcg2o1: #CC6600;      --mcg3y1: #EEE8AA;
+    --mcg0b2: #222;         --mcg1r2: #FF4040;      --mcg2o2: #D2691E;      --mcg3y2: #F0E68C;
+    --mcg0b3: #333;         --mcg1r3: #FF6666;      --mcg2o3: #FF8000;      --mcg3y3: #FFD700;
+    --mcg0b4: #444;         --mcg1r4: #FF8080;      --mcg2o4: #FF9933;      --mcg3y4: #FFFF00;
+    --mcg0b5: #555;         --mcg1r5: #FF9999;      --mcg2o5: #FFA040;      --mcg3y5: #FFFF33;
+    --mcg0b6: #666;         --mcg1r6: #FFC0C0;      --mcg2o6: #FFB266;      --mcg3y6: #FFFF40;
+    --mcg0b7: #777;         --mcg1r7: #FFCCCC;      --mcg2o7: #FFC080;      --mcg3y7: #FFFF66;
+    --mcg0b8: #888;         --mcg1r8: #FFCCE5;      --mcg2o8: #FFCC99;      --mcg3y8: #FFFF80;
+    --mcg0b9: #999;         --mcg1r9: #FFC0E0;      --mcg2o9: #FFE0C0;      --mcg3y9: #FFFF99;
+    --mcg0bA: #aaa;         --mcg1rA: #FF99CC;      --mcg2oA: #FFE0E0;      --mcg3yA: #FFFFA0;
+    --mcg0bB: #bbb;         --mcg1rB: #FF80C0;      --mcg2oB: #FFCCCC;      --mcg3yB: #FFFFB2;
+    --mcg0bC: #ccc;         --mcg1rC: #FF66B2;      --mcg2oC: #FFB2B2;      --mcg3yC: #FFFFC0;
+    --mcg0bD: #ddd;         --mcg1rD: #FF40A0;      --mcg2oD: #FFA0A0;      --mcg3yD: #FFFFCC;
+    --mcg0bE: #eee;         --mcg1rE: #FF3399;      --mcg2oE: #FF9999;      --mcg3yE: #FFFFE0;
+    --mcg0bF: #fff;         --mcg1rF: #FF0080;      --mcg2oF: #FF8080;      --mcg3yF: #FFFFE5;
+
+    --mcg4g0: #002000;      --mcg5b0: #000040;      --mcg6b1: #001919;      --mcg7p0: #8000FF;
+    --mcg4g1: #003300;      --mcg5b1: #000060;      --mcg6b2: #002020;      --mcg7p1: #9933FF;
+    --mcg4g2: #004000;      --mcg5b2: #000080;      --mcg6b3: #003333;      --mcg7p2: #A040FF;  
+    --mcg4g2: #004000;      --mcg5b2: #000080;      --mcg6b4: #004040;      --mcg7p3: #B266FF;   
+    --mcg4g3: #004c00;      --mcg5b3: #0000A0;      --mcg6b5: #004C4C;      --mcg7p4: #C080FF;   
+    --mcg4g4: #006000;      --mcg5b4: #0000C0;      --mcg6b6: #006060;      --mcg7p5: #CC99FF;
+    --mcg4g5: #006600;      --mcg5b5: #0000FF;      --mcg6b7: #006666;      --mcg7p6: #E0C0FF;
+    --mcg4g6: #008000;      --mcg5b6: #0040FF;      --mcg6b8: #008080;      --mcg7p7: #E5CCFF;
+    --mcg4g7: #009900;      --mcg5b7: #0060FF;      --mcg6b9: #339999;      --mcg7p9: #E0C0E0;  
+    --mcg4g8: #00Cc00;      --mcg5b8: #0080FF;      --mcg6bA: #40A0A0;      --mcg7pA: #CC99CC;
+    --mcg4g9: #00FF00;      --mcg5b9: #00A0FF;      --mcg6bB: #66B2B2;      --mcg7pB: #C080C0;
+    --mcg4gA: #33FF33;      --mcg5bA: #00C0FF;      --mcg6bC: #80C0C0;      --mcg7pC: #B266B2;
+    --mcg4gB: #40FF40;      --mcg5bB: #00F0FF;      --mcg6bD: #99CCCC;      --mcg7pD: #A040A0;
+    --mcg4gC: #66FF66;      --mcg5bC: #00FFFF;      --mcg6bE: #C0E0E0;      --mcg7pE: #993399;
+    --mcg4gD: #80FF80;      --mcg5bD: #40FFFF;      --mcg6bF: #CCE5E5;      --mcg7pF: #800080;
+    --mcg4gE: #99FF99;      --mcg5bE: #80FFFF;
+    --mcg4gF: #A0FFA0;      --mcg5bF: #C0FFFF;
+    --mcg4gG: #C0FFC0;
+    --mcg4gH: #CCFFCC;
+    --mcg4gI: #E0FFE0;
+    --mcg4gJ: #E5FFE5;
+
+    --mcg8m0: #331900;      --mcg9t0: rgba(0, 0, 0, .1);
+    --mcg8m1: #402000;      --mcg9t1: rgba(0, 0, 0, .2); 
+    --mcg8m2: #663300;      --mcg9t2: rgba(0, 0, 0, .3);  
+    --mcg8m3: #804000;      --mcg9t3: rgba(0, 0, 0, .4); 
+    --mcg8m4: #8B4513;      --mcg9t4: rgba(0, 0, 0, .5);    
+    --mcg8m5: #994C00;      --mcg9t5: rgba(0, 0, 0, .6); 
+    --mcg8m6: #B26666;      --mcg9t6: rgba(0, 0, 0, .7); 
+    --mcg8m7: #A0522D;      --mcg9t8: rgba(0, 0, 0, .9); 
+    --mcg8m8: #A04040;      --mcg9t8: rgba(0, 0, 0, .9);    
+    --mcg8m9: #993333;      --mcg9t9: rgba(0, 0, 0, .99); 
+    --mcg8mA: #990000;
+    --mcg8mB: #800000;
+    --mcg8mC: #600000;               
+    --mcg8mD: #400000;
+    --mcg8mE: #200000;
+    
+}
+
+body{
+    font-family: 'Noto Sans TC', sans-serif;
+}
+.fw-900 { font-weight: 900;}
+.fw-800 { font-weight: 800;}
+.fw-700 { font-weight: 700;}
+.fw-600 { font-weight: 600;}
+.fw-500 { font-weight: 500;}
+.fw-400 { font-weight: 400;}
+.fw-300 { font-weight: 300;}
+.fw-200 { font-weight: 200;}
+.fw-100 { font-weight: 100;}
+    
+}
+
+body
+{
+    font-family: 'Noto Sans TC', sans-serif;
+}
+.fw-900 { font-weight: 900;}
+.fw-800 { font-weight: 800;}
+.fw-700 { font-weight: 700;}
+.fw-600 { font-weight: 600;}
+.fw-500 { font-weight: 500;}
+.fw-400 { font-weight: 400;}
+.fw-300 { font-weight: 300;}
+.fw-200 { font-weight: 200;}
+.fw-100 { font-weight: 100;}
+
+.demo 
+{
+    width: 50%;
+    padding: 25px;
+    margin: 25px;
+    border: 2px solid var(--mycolor64);
+}
+
+body {
+    font-family: 'Zen Maru Gothic', serif;
+}
+
+.fw-900 {
+    font-weight: 900;
+}
+
+.fw-800 {
+    font-weight: 800;
+}
+
+.fw-200 {
+    font-weight: 200;
+}
+
+.fw-100 {
+    font-weight: 100;
+}
+
+.mr-1 {
+    margin-right: 1px;
+}
+
+.mr-2 {
+    margin-right: 2px;
+}
+
+.mr-3 {
+    margin-right: 3px;
+}
+
+.mr-4 {
+    margin-right: 4px;
+}
+
+.mr-5 {
+    margin-right: 5px;
+}
+
+.textcolor01 {
+    color: var(--textcolor01);
+}
+
+.textcolor02 {
+    color: var(--textcolor02);
+}
+
+.textcolor03 {
+    color: var(--textcolor03);
+}
+
+.bg-cover {
+    background-position: center center;
+    background-size: cover;
+}
+
+.demo{
+    width: 70%;
+    padding: 25px;
+    margin: 25px;
+    border: 2px solid var(--mycolor01);
+}

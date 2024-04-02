@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <title>6-2 PairOfConfession 告白配對</title>
+    <style>
+        /* :root {
+            --fourth-color: #c9bbd7;
+        } */
+
+        .mbManage .banner2 {
+            background: url("../img/s8-6-4.jpg") center/cover;
+            -webkit-clip-path: url(#banner2Clip);
+            clip-path: url(#banner2Clip);
+            height: 40vw;
+            animation: fade-in 5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.05s 1 normal forwards;
+        }
+
+        .newsList li:nth-of-type(odd) {
+            background-color: var(--fourth-color-half);
+        }
+
+        .newsList li {
+            background: var(--fourth-color);
+        }
+
+        .animate__animated.animate__delay-6s {
+            -webkit-animation-delay: 6s;
+            animation-delay: 6s;
+            -webkit-animation-delay: calc(var(--animate-delay)* 6);
+            animation-delay: calc(var(--animate-delay)* 6);
+        }
+
+        .animate__animated.animate__delay-7s {
+            -webkit-animation-delay: 7s;
+            animation-delay: 7s;
+            -webkit-animation-delay: calc(var(--animate-delay)* 7);
+            animation-delay: calc(var(--animate-delay)* 7);
+        }
+
+        /*  將 主選單 固定 在 右側  */
+        .menu-container { /* 整個選單容器 */
+            position: fixed;                            /* 固定位置 */
+            top: 30%;                                   /* 上方距離為 30% */
+            right: 0;                                   /* 靠右 */
+            width: 100px;                            
+            background-color: rgba(255, 255, 255, 0.5);     /* 透明背景 */
+            border-radius: 20px;
+            margin-right: 20px;
+            z-index: 1000;                              /* 堆疊順序，設定較高以確保選單位於最上層 */
+            box-shadow:  0 0 15px 0 #00000047;
+        }
+
+        .menu-item { /* 選項樣式 */
+            list-style-type: none;          /* 移除預設符號 */
+            text-align: center;
+        }
+    
+        .menu-item a { /* 選項連結樣式 */
+            font-size: 18px;         
+            margin: 10px;
+            text-decoration: none;          /* 移除連結底線 */
+            color: rgb(0, 13, 189);                 /* 文字顏色 */
+        }
+
+        .menu-item a:hover { /* 當滑鼠移至選項上時，文字會變成粗體紅色 */
+            font-weight: bold;
+            color: rgb(255, 0, 0);
+        }
+
+
+        /* section 6-2-2-上傳志願：顯示版 配色 ，上面為 偶數版配色、下面為 奇數版配色 */ 
+        .newsPage .newsList li {
+            background-color: #d598ee;
+        }
+        .newsPage .newsList li:nth-of-type(odd) {
+            background-color: #e3ccec;
+        }
+        .pill-bg{
+            background-color: #8100b4;
+        }
+    </style>
+</head>
+<body class="productPage mbManage" style="background-color: #d4cae4;">
+    <!-- 頁首：Logo 與 選單 -->
+    <section id="s-6-2-0" class="container-fluid">
+        <nav class="my-navbar my-navbar__expand--md">
+            <div class="container d-flex justify-content-between">
+                <div class="d-flex column-gap-2">
+                    <a href="/SPA-for-all.html" style="display: flex; align-items: center;"><img
+                            style="width: 60px; border-radius: 50%" src="img/logo-w-401.jpg"></a>
+                    <p class="text-left"
+                        style="color: rgb(70, 70, 216); font-size: 20px; padding-top: 20px; padding-bottom: 0; z-index: 2;">
+                        會員專區/ 網站功能/ 告白配對</p>
+                </div>
+                <div class="my-navbar__collapse">
+                    <ul style="text-decoration: none;">
+                        <li style="text-decoration: none;"><a href="#s-6-2-1">6-2-1-填寫志願</a></li>
+                        <li style="text-decoration: none;"><a href="#s-6-2-2">6-2-2-收取資料</a></li>
+                        <li style="text-decoration: none;"><a href="#s-6-2-3">6-2-3-建立ＤＢ</a></li>
+                        <li style="text-decoration: none;"><a href="#s-6-2-3">6-2-4-進行配對</a></li>
+                        <li style="text-decoration: none;"><a href="#s-6-2-4">6-2-5-產生報表</a></li>
+                        <li style="text-decoration: none;"><a href="6-0-webFunction.html">網站功能</a></li>
+                        <li style="text-decoration: none;"><a href="0-memberOnly.html">會員專區</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- 定義 裁剪路徑 banner2Clip，裁剪路徑的單位被設定為 objectBoundingBox。 -->
+        <div class="banner2 d-flex flex-center">
+            <svg width="0" height="0">
+                <defs>
+                    <clipPath id="banner2Clip" clipPathUnits="objectBoundingBox">
+                        <path d="M0 0 V0.75 C0.2 1,0.8 1,1 0.75 V0 z" />
+                    </clipPath>
+                </defs>
+            </svg>
+        </div>
+        <!-- 首頁 的 跑馬燈 -->
+        <div class="row" style="margin-top: 0; padding-top: 0;">
+            <marquee direction="left" scrollamount="20" behavior="left">
+                <p class="h1 fw-900" style="color:rgb(55, 110, 152);">提升 青少年
+                    <span style="color:rgb(46, 39, 95);"> 挫折耐受力 </span>
+                    <span style="color:rgb(138, 140, 198);"> 談情說愛 </span>
+                    <span style="color:rgb(44, 98, 206);"> 接種一劑 失戀疫苗 </span>
+                    <span style="color:rgb(88, 155, 167);">&emsp;&emsp;&emsp;Sincs 2012</span>
+                </p><br>
+                <p class="h3 fw-900" style="color:rgb(55, 110, 152); margin-top: -30px;">Improve the
+                    <span style="color: rgb(46, 39, 95);"> Frustration tolerance </span> of Youth by
+                    <span style="color: rgb(138, 140, 198);"> Discussing the Theme of Love </span> &
+                    <span style="color: rgb(44, 98, 206);"> Vaccinate a Lovelorn Vaccine</span>
+                </p>
+            </marquee>
+        </div>
+    </section>
+    <!-- 將 選單 固定在 右側  -->
+    <section>
+        <div class="menu-container">
+            <ul class="menu m-0 pt-2 pb-2 ps-0">
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s-6-2-1">6-2-1<br>填寫志願</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s-6-2-2">6-2-2<br>收取資料</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s-6-2-3">6-2-3<br>建立ＤＢ</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s-6-2-4">6-2-4<br>進行配對</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s-6-2-5">6-2-5<br>產生報表</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="6-0-webFunction.html">網站功能</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="0-memberOnly.html">會員專區</a></li>
+            </ul>
+        </div>
+    </section>
+    <!-- section 6-2-1：填寫志願  -->
+    <section id="s-6-2-1" class="container" style="padding-top: 50px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row mb-2 h1 d-flex flex-column align-left color-text-main wow animate__lightSpeedInRight"
+                         data-wow-duration="2s" data-wow-delay="0s" data-wow-iteration="1" style="color:#8100b4; font-weight: 900;">
+                         6-2-1-填寫志願<span style="font-size: small;">填寫 Google 表單：告白對象 意象調查表</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5"><img src="img/S-6-2-1.jpg" style="height: 80vh;"></div>
+                    <div class="col-md-7 fs-4">
+                        <p class="h3 text-end wow animate__lightSpeedInLeft" data-wow-duration="4S" data-wow-delay="0s"
+                            data-wow-iteration="1" style="animation-fill-mode:forwards; margin-top: -50px; color:#8100b4;">
+                            左圖 為&emsp;紙本&emsp;告白對象意象調查表</p>
+                        <p class="h4 fw-900 text-end wow animate__lightSpeedInLeft" data-wow-duration="6S" data-wow-delay="0s"
+                            data-wow-iteration="1" style="animation-fill-mode:forwards; margin-top: 10px; color:#af7fc2">
+                            讓您能&emsp;一目瞭然&emsp;即將填寫表單&emsp;之&emsp;所有內容</p>
+                        <p class="h2 text-end wow animate__lightSpeedInLeft" data-wow-duration="8S" data-wow-delay="0s"
+                            data-wow-iteration="1" style="animation-fill-mode:forwards; margin-top: 10px; color:#8100b4;">
+                            填寫 Google 表單，請 掃描 下方 QRcode</p>
+                        <img class="mt-5" style="padding-top: 50px; margin-left: 300px; width: 300px;"
+                            src="img/S-6-2-1-QRcode-2.png" alt=""><br>
+                        <a class="h1" style="margin-left: 330px; line-height:5; color:#8100b4;" href="https://forms.gle/ZaGHRKnunGVcFSKMA/">或&emsp;<span>點擊此處</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section 6-2-2：上傳志願  -->
+    <section id="s-6-2-2" class="container-fluid" style="height:100vh; padding-top: 30px;">
+        <div class="container">
+            <div class="row" style="padding-top: 30px;">
+                <div class="col-md-7">
+                    <div class="row mb-2 h1 d-flex flex-column align-left wow animate__lightSpeedInRight"
+                        data-wow-duration="2s" data-wow-delay="0s" data-wow-iteration="1"
+                        style="color:#8100b4; font-weight: 900;">6-2-2-收取資料
+                        <span style="font-size: small;">取得 回覆表單後 的 Excel 檔案 ( 內含：全年級 告白對象 意象調查、對象優點、友愛同學勇氣獎 報名結果 )</span></div><br>
+                    <div class="fs-4" style="margin-top: -50px;">
+                        <p class="h3 text-start wow animate__lightSpeedInRight" data-wow-duration="4S"
+                            data-wow-delay="0s" data-wow-iteration="1"
+                            style="animation-fill-mode:forwards; margin-top: 30px; color:#8100b4;">Google 表單 允許建立 問卷調查 並 收集回覆，步驟如下：</p>
+                    </div>
+                </div>
+                <div class="col-md-5" style="text-align: right; text-decoration: none;">
+                    <div style="font-size: 20px;">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <div style="text-decoration: none;"><ul class="row newsList"></ul></div>
+                <p class="h2 text-end  wow animate__lightSpeedInLeft" data-wow-duration="8s" data-wow-delay="6s" data-wow-iteration="1" 
+                style="color:#8100b4; font-weight: 900; margin-top: 20px;">如此 便可取得&emsp;會員&emsp;回覆表單後的 Excel 檔案資料</p>
+            </div>
+            <div class="col-md-3 text-center">
+                <a class="h1 fw-900" href="https://forms.google.com/" style="text-decoration: none; color: #ff0303;">前<br>往<br>Google<br>表<br>單</a>
+            </div>
+        </div>
+    </section>
+    <!-- section 6-2-3：建資料庫  -->
+    <section id="s-6-2-3" class="container" style="height: 100vh; padding-top: 50px;">
+        <div class="container">
+            <div class="row">
+                <div class="row mb-2 h1 d-flex flex-column align-left wow animate__lightSpeedInRight" data-wow-duration="3s" data-wow-delay="0s" data-wow-iteration="1"
+                     style="color:#8100b4; font-weight: 900;">6-2-3-建立ＤＢ
+                     <span style="font-size: small;"> 將 Excel 檔案內資料&emsp;匯入 資料庫</span></div><br>
+                <div class="row h4" style="padding-top: 10px;">            
+                    <div class="col-5 offset-1 p-3 rounded-3 shadow-lg border border-2 border-dark" style="background-color: #e8d6ef;">
+                        <div class="display-6 mb-3" style="color:#8100b4;">寫入 資料表</div>
+                        <div class="row">
+                            <p>1. 選擇 excel 匯入檔案：</p>
+                            <div style="padding-left: 40px;">
+                                <input type="file" id="excel-file">&emsp;&emsp; 
+                                <label for="" id="file_state"></label>
+                            </div>                 
+                        </div>
+                        <div class="row mt-3">
+                            <p>2. 匯入 資料庫：學生資料表</p>
+                            <div style="padding-left: 40px;">
+                                <button class="btn text-light" id="clear_btn" style="background-color: #8100b4;">執行</button>
+                                <label for="" id="student_state"></label>
+                            </div>                   
+                        </div>
+                        <div class="row mt-3">
+                            <p>3. 匯入 資料庫：志願序及優點</p>
+                            <div style="padding-left: 40px;">
+                                <button class="btn text-light" id="clear_btn" style="background-color: #8100b4;">執行</button>
+                                <label for="" id="active_state"></label>
+                            </div>
+                        </div> 
+                        <div class="row mt-3">
+                            <p>4. 匯入 資料庫：被告白名單</p>
+                            <div style="padding-left: 40px;">
+                                <button class="btn text-light" id="clear_btn" style="background-color: #8100b4;">執行</button>
+                                <label for="" id="passive_state"></label>
+                            </div>
+                        </div> 
+                        <div class="row mt-3">
+                            <p>5. 計算：每位學生 得票數 ( 人氣指數 )</p> 
+                            <div style="padding-left: 40px;">
+                                <button class="btn text-light" id="clear_btn" style="background-color: #8100b4;">執行</button>
+                                <label for="" id="popular_state"></label>
+                            </div>
+                        </div>                               
+                    </div>       
+                    <div class="col-5 offset-0 p-3 rounded-3 shadow-lg border border-2 border-dark" style="background-color: #e8d6ef;">
+                        <div class="display-6 mb-3" style="color:#8100b4;">清空 資料表</div>
+                        <div class="row">
+                            <div class="col-9 mb-3">
+                                <select name="clearTable" id="clearTable" class="form-select">
+                                    <option class="h3 text-success" disabled>請選擇 要清空的 資料表</option>
+                                    <option class="h3" value="1">學生資料表&emsp;student</option>
+                                    <option class="h3" value="2">&emsp;網站成員&emsp;member</option>
+                                    <option class="h3" value="3">&emsp;&emsp;志願序&emsp;active</option>
+                                    <option class="h3" value="4">&emsp;&emsp;得票數&emsp;popular</option>
+                                    <option class="h3" value="5">被告白清單&emsp;passive</option>
+                                    <option class="h3" value="6">&emsp;配對結果&emsp;result</option>
+                                    <option class="h3 text-danger" value="99">&emsp;&emsp; * 清空&emsp;所有資料表</option>
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <button class="btn text-light" id="clear_btn" style="background-color: #8100b4;">執行</button>&nbsp;&nbsp;
+                                <label for="" id="clear_state"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section 6-2-4：進行 配對程序  -->
+    <section id="s-6-2-4" class="container" style="height: 100vh; padding-top: 50px;">
+        <div class="container">
+            <div class="row" style="color:#8100b4;">
+                <div class="row mb-2 h1 d-flex flex-column align-left wow animate__lightSpeedInRight" data-wow-duration="3s" data-wow-delay="0s" data-wow-iteration="1"
+                     style="color:#8100b4; font-weight: 900;">6-2-4-進行配對
+                     <span style="font-size: small;"> 針對 資料庫中資料表的內容 事先完成 進行告白練習時 告白對象的分配</span></div><br>
+                     <div class="row h3" style="padding-top: 20px;">
+                        <div class="col-7 p-3 rounded-5 shadow-lg border border-2 border-dark" style="background-color: #e8d6ef;">
+                            <!-- <div class="display-6 mb-3" style="color:#8100b4;">執行 配對程序</div> -->
+                            <div class="row">
+                                <p>步驟 1：彼此互為 第一志願。</p>
+                                <div style="padding-left: 120px;">
+                                    <button class="h3 btn btn-success" id="result-flag1_btn" style="background-color: #8100b4;"> 執行步驟 1 </button>&nbsp;&nbsp;
+                                    <label for="" id="result-flag1_state"></label>
+                                </div>                              
+                            </div>
+                            <div class="row mt-3">
+                                <p>步驟 2：僅填寫 １個志願的學生。</p>
+                                <div style="padding-left: 120px;">
+                                    <button class="h3 btn btn-success" id="result-flag2_btn" style="background-color: #8100b4;"> 執行步驟 2 </button>
+                                    <label for="" id="result-flag2_state"></label>
+                                </div>
+                            </div> 
+                            <div class="row mt-3">
+                                <p>步驟 3：第一志願 是 別班同學。</p>
+                                <div style="padding-left: 120px;">
+                                    <button class="h3 btn btn-success" id="result-flag3_btn" style="background-color: #8100b4;"> 執行步驟 3 </button>
+                                    <label for="" id="result-flag3_state"></label>
+                                </div>
+                            </div> 
+                            <div class="row mt-3">
+                                <p>步驟 4：所填寫的志願中 仍待配對的人數 最少者。</p>
+                                <div style="padding-left: 120px;">
+                                    <button class="h3 btn btn-success" id="result-flag4_btn" style="background-color: #8100b4;"> 執行步驟 4 </button>
+                                    <label for="" id="result-flag4_state"></label>
+                                </div> 
+                            </div>
+                            <div class="row mt-3">
+                                <p>步驟 5：重複執行 步驟 4，直至 再無配對成功 為止。</p>
+                            </div>                                 
+                            <div class="row mt-3">
+                                <div class="col-7">
+                                    <p class="h2 text-primary">告白配對 五個步驟 一鍵完成</p>
+                                </div>
+                                <div class="col-3">
+                                    <div>
+                                        <button class="h3 btn btn-success" id="result-flag5_btn" style="background-color: #000cb4;"> 一鍵完成 配對程序 </button>
+                                        <label for="" id="result-flag5_state"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 p-3 rounded-5 shadow-lg border border-2 border-dark" style="background-color: #e8d6ef;">
+                            <div class="row mt-3">
+                                <p class="h3 text-center mt-5" style="color:#8100b4;">若因 學生缺席<br>或 其他因素<br>需要 重新配對<br>請先 清空<br>前次 配對結果</p>
+                                <div class="display-6 mb-3 text-danger text-center">清空 配對結果</div>
+                                <div class="text-center">
+                                    <button class="h2 btn btn-danger" id="clear_btn" style="width: 90px;"> 清空 </button>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section 6-2-5：產生報表  -->
+    <section id="s-6-2-5" class="container" style="height: 100vh; padding-top: 50px;">
+        <div class="container">
+            <div class="row">
+                <div class="row h1 fw-900 d-flex flex-column align-items-left color-text-main" style="color: #8100b4;">產生報表</div>
+                配對成功名單總覽<br>待友愛名單總覽<br>男生告白名單<br>女生告白名單<br>人氣王排行榜
+            </div>
+        </div>
+    </section>
+    <br>
+    <footer>
+        <h5 class="fs-4 text-end m-0" style="margin-top: 20px; padding: 20px; color: beige;">design & setup by the Team
+            of VLlV 2024.3.9</h5>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script src="https://unpkg.com/counterup2@2.0.2/dist/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn."></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.bootcss.com/xlsx/0.11.5/xlsx.core.min.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script>new WOW().init();</script>
+    <script>
+        // 紫色系列
+        const colorset = [
+            '#d598ee',
+            '#e3ccec'
+        ]
+        const starterTextColor = '#e3ccec';
+        const starterBg = '#8100b4';
+        function updateNewsList() {
+            newsList.innerHTML = showData.map((data, index) =>
+             `
+            <li class="p-3 d-flex align-items-center gap-2 animate__animated animate__flipInX animate__delay-${index}s animate__fast" style='background-color:${colorset[index % 2]};'>
+            <h2 class="flex-shrink-0 m-0 px-3 py-2 fs-5 rounded-pill color-bg-main" style='background-color:${starterBg}; color:${starterTextColor}';>${data.title}</h2>
+            <a href="#" class="link-dark"><h3 class="m-0 fs-5">${data.content}</h3></a>          
+            </li>
+            `
+            ).join("");
+        }
+
+        const newsList = document.querySelector('.newsList');
+        // const url = '/bakery/fakedata/news.json';//上線版
+        const url = 'fakedata/PairOfConfession.json';//Live Server版
+
+        fetch(url)
+            .then(res => res.json())
+            .then(newsData => {
+                //過濾出要顯示的部分
+                showData = newsData.filter(data => data.show);
+                updateNewsList();
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+// 以下為 6-2-3-建立 資料庫
+        var student_flag = true;
+        var persons = []; // 存储获取到的数据       
+        $('#excel-file').change(function(e) {
+            $("#file_state").text("");
+            var files = e.target.files;
+            var fileReader = new FileReader();
+                fileReader.onload = function(ev) {
+                    try {
+                        var data = ev.target.result
+                        var workbook = XLSX.read(data, {
+                                type: 'binary'
+                            }) // 以二進制流方式读取得到整份excel表格对象
+                        //var persons = []; // 存储获取到的数据
+                    } catch (e) {
+                        console.log('文件类型不正确');
+                        return;
+                    }
+            
+                    // 表格的表格范围，可用于判断表头是否数量是否正确
+                    var fromTo = '';
+                    // 遍历每张表读取
+                    for (var sheet in workbook.Sheets) {
+                        if (workbook.Sheets.hasOwnProperty(sheet)) {
+                            fromTo = workbook.Sheets[sheet]['!ref'];
+                            console.log(fromTo);
+                            persons = persons.concat(XLSX.utils.sheet_to_json(workbook.Sheets[sheet]));
+                            // break; // 如果只取第一张表，就取消注释这行
+                        }
+                    }
+                    //在控制台打印出来表格中的数据
+                    console.log(persons);
+                    $("#file_state").text("成功");
+            };
+            // 以二進制方式 打開文件
+            fileReader.readAsBinaryString(files[0]);
+        });
+
+        $("#student_btn").click(function(){
+            $("#student_state").text("");
+            persons.forEach(function(item){
+                console.log(item); 
+                if (student_flag === false ){
+                    return false;
+                }else{
+
+                    $.ajax({
+                        type:"POST",
+                        url:"create-student-api.php",
+                        data:JSON.stringify(item),
+                        dataType:"json",
+                        async: false,
+                        success:showdata_student,
+                        error:function(){
+                            //alert("error-createDataBase-api.php");
+                        }
+                    });               
+                }
+            });
+        });
+
+        $("#active_btn").click(function(){
+            $("#active_state").text("");
+            persons.forEach(function(item){
+                console.log(item);   
+                $.ajax({
+                    type:"POST",
+                    url:"create-active-api.php",
+                    data:JSON.stringify(item),
+                    dataType:"json",
+                    async: false,
+                    success:showdata_active,
+                    error:function(){
+                        // alert("error-create-active-api.php");
+                    }
+                });               
+            });
+        });
+
+        $("#passive_btn").click(function(){
+            $("#passive_state").text("");      
+            $.ajax({
+                type:"GET",
+                url:"create-passive-api.php",
+                data:{},
+                success:function(msg){
+                    console.log(msg);
+                },
+                error:function(){
+                    // alert("error-create-active-api.php");
+                }
+            });                 
+        });
+
+        $("#popular_btn").click(function(){
+            $("#popular_state").text("");      
+            $.ajax({
+                type:"GET",
+                url:"create-popular-api.php",
+                data:{},
+                success:function(msg){
+                    console.log(msg);
+                },
+                error:function(){
+                    // alert("error-create-active-api.php");
+                }
+            });                 
+        });
+
+        $("#clear_btn").click(function(){
+            // console.log($("#clearTable").val());
+            $.ajax({
+                type:"POST",
+                url:"delete-table-api.php",
+                data:{
+                    TableType:$("#clearTable").val()
+                },
+                success:function(msg){
+                    console.log(msg);
+                    $("#clear_state").text("成功");
+                },
+                error: function(){
+                    alert("error-delete-table-api.php");
+                }
+            });
+        });
+
+        $('#clearTable').bind("input propertychange", function(){
+                $("#clear_state").text("");
+            });
+
+        function showdata_student(data){
+            console.log(data);
+            alert(data.message);
+            if (data.state){
+                $("#student_state").text("成功");
+            }else{
+                student_flag = false;
+            }           
+        }
+
+        function showdata_active(data){
+            console.log(data);
+            alert(data.message);
+            $("#active_state").text("成功");
+        }
+    
+// 以下為 6-2-4-執行 配對程序
+        $("#result-flag1_btn").click(function(){
+            $("#result-flag1_state").text("");    
+            $.ajax({
+                type:"GET",
+                url:"create-result-flag1-api.php",
+                data:{},
+                success:function(msg){
+                    console.log(msg);
+                    $("#result-flag1_state").text("成功");
+                },
+                error:function(){
+                    // alert("error-create-active-api.php");
+                }
+            });                 
+        });
+
+        $("#result-flag2_btn").click(function(){
+            $("#result-flag2_state").text("");      
+            $.ajax({
+                type:"GET",
+                url:"create-result-flag2-api.php",
+                data:{},
+                success:function(msg){
+                    console.log(msg);
+                    $("#result-flag2_state").text("成功");
+                },
+                error:function(){
+                    // alert("error-create-active-api.php");
+                }
+            });                 
+        });
+
+        $("#result-flag3_btn").click(function(){
+            $("#result-flag3_state").text("");      
+            $.ajax({
+                type:"GET",
+                url:"create-result-flag3-api.php",
+                data:{},
+                success:function(msg){
+                    console.log(msg);
+                    $("#result-flag3_state").text("成功");
+                },
+                error:function(){
+                    // alert("error-create-active-api.php");
+                }
+            });                 
+        });
+
+        $("#result-flag4_btn").click(function(){
+            $("#result-flag4_state").text("");      
+            $.ajax({
+                type:"GET",
+                url:"create-result-flag4-api.php",
+                data:{},
+                success:function(msg){
+                    console.log(msg);
+                    $("#result-flag4_state").text("成功");
+                    // $("#result-flag4_state").text(JSON.parse(msg).message);
+                },
+                error:function(){
+                    // alert("error-create-active-api.php");
+                }
+            });                 
+        });
+
+        $("#result-flag5_btn").click(function() {
+            $("#result-flag5_state").text(""); 
+
+            // 第一個請求
+            $.ajax({
+                type: "GET",
+                url: "create-result-flag1-api.php",
+                success: function(msg1) {
+                    console.log(msg1);
+                    $("#result-flag5_state").text("flag1 成功");
+
+                    // 第二個請求
+                    $.ajax({
+                        type: "GET",
+                        url: "create-result-flag2-api.php",
+                        success: function(msg2) {
+                            console.log(msg2);
+                            $("#result-flag5_state").text("flag2 成功");
+
+                            // 第三個請求
+                            $.ajax({
+                                type: "GET",
+                                url: "create-result-flag3-api.php",
+                                success: function(msg3) {
+                                    console.log(msg3);
+                                    $("#result-flag5_state").text("flag3 成功");
+
+                                    // 第四個請求
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "create-result-flag4-api.php",
+                                        success: function(msg4) {
+                                            console.log(msg4);
+                                            $("#result-flag5_state").text("成功");
+                                        },
+                                        error: function() {
+                                            // 第四個請求失敗
+                                            console.error("第四個 API 請求失敗");
+                                        }
+                                    });
+                                },
+                                error: function() {
+                                    // 第三個請求失敗
+                                    console.error("第三個 API 請求失敗");
+                                }
+                            });
+                        },
+                        error: function() {
+                            // 第二個請求失敗
+                            console.error("第二個 API 請求失敗");
+                        }
+                    });
+                },
+                error: function() {
+                    // 第一個請求失敗
+                    console.error("第一個 API 請求失敗");
+                }
+            });
+        });
+
+        // 清除配對結果資料表
+        $("#clear_btn").click(function(){
+            // console.log($("#clearTable").val());
+            Swal.fire({
+            title: "是否清除配對結果?",
+            showDenyButton: false,
+            showCancelButton: true,
+            confirmButtonText: "確認刪除",
+            denyButtonText: `Don't save`
+            }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type:"POST",
+                    url:"delete-table-api.php",
+                    data:{
+                        TableType: 6
+                    },
+                    success:function(msg){
+                        console.log(msg);
+                        $("#clear_state").text("成功");
+                    },
+                    error: function(){
+                        alert("error-delete-table-api.php");
+                    }
+                });
+                $.ajax({
+                    type:"GET",
+                    url:"update-repair-api.php",
+                    data:{},
+                    success:function(msg){
+                        console.log(msg);
+                    },
+                    error:function(){
+                        alert("error-update-repair-api.php");
+                    }
+                }); 
+                Swal.fire("清除配對結果成功!", "", "success");
+            }
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

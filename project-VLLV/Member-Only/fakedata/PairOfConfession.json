@@ -1,0 +1,38 @@
+[
+    {  
+      "title": "登入帳號",
+      "content": "登入 Google 帳戶。",
+      "show": true
+    },
+    {
+      "title": "前往表單",
+      "content": "https://forms.google.com/。",
+      "show": true
+    },
+    {
+      "title": "選擇問卷",
+      "content": "選擇 您要取得回覆的問卷。",
+      "show": true
+    },
+    {  
+      "title": "查看回覆",
+      "content": "在 Google 表單的編輯頁面中，點選上方的「回覆」選項卡，可以查看 所有已收集的回覆。",
+      "show": true
+    },
+    {
+      "title": "點選下載",
+      "content": "在 回覆頁面 右上角 有個三個點的選單，點選後會出現「下載回覆」的選項，可以選擇 下載回覆的格式，包括 Excel 檔案（XLSX 格式）。",
+      "show": true
+    },
+    {
+        "title": "選擇範圍",
+        "content": "在彈出的視窗中，選擇 要匯出的 Excel 檔案 回覆範圍，例如：全部回覆 或 特定時間範圍的回覆。",
+        "show": true
+    },    
+    {
+      "title": "下載檔案",
+      "content": "點選「下載」按鈕，即可 下載檔案 ( 包含回覆 )。",
+      "show": true
+    }
+  ]
+  

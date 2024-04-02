@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemberManage 會員管理</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/myall.css">
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="container row h1" style="margin-top: 20px; margin-left: 20px;">&emsp;&emsp;會員總覽</div>
+        </div>
+        <div class="col-md-6"></div>
+        <div class="col-md-3 pt-5">
+            <caption class="text-rihrt">
+                <a href="0-memberOnly.html"      style="text-decoration: none;">&emsp;會員專區</a>
+                <a href="6-0-webFunction.html"   style="text-decoration: none;">&emsp;網站功能</a>
+                <a href="6-4-0-AboutMember.html" style="text-decoration: none;">&emsp;會員相關</a>
+            </caption>
+        </div>
+    </div>
+    <div class="container">
+        <table class="table table-bordered table-hover table-sm border-success table-rwd">
+            <caption class="text-end">會員列表：每頁 10 筆</caption>
+            <thead class="table-dark" style="text-align: center;">
+                <tr>
+                    <th>序號</th>
+                    <th>帳號</th>
+                    <th>電子郵件</th>
+                    <th>血型</th>
+                    <th>生肖</th>
+                    <th>星座</th>
+                    <th>註冊時間</th>
+                    <th>會員等級</th>
+                    <th>維護管理 功能選項</th>
+                </tr>
+            </thead>
+            <tbody id="mydata"> <!-- 先寫入一筆資料 測試，待 從資料庫讀入資料時 會先將 此筆資料 所占的位置 清空 -->
+                <tr>                  
+                    <td>test test</td>
+                    <td>test test</td>
+                    <td>test test</td>
+                    <td>test test</td>
+                    <td>test test</td>
+                    <td>test test</td>
+                    <td>test test</td>
+                    <td>test test</td>
+                    <td>
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#updateModal">更 Email</button>
+                        <button class="btn btn-danger" >刪除</button>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateLevel">更 會員等級</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 以下 進行 分頁 -->
+    <div class="container">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center" id="pageList">
+                <li class="page-item"><a class="page-link" href="#" onclick="drawTable(0)">1</a></li>
+            </ul>
+        </nav>
+    </div>
+    <!-- updateModal：Email -->
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-bg-success">
+                    <h1 class="modal-title fs-3 fw-900" id="exampleModalLabel">更 會員 Email</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="updateModal_username" class="form-label">帳號</label>
+                        <input type="text" class="form-control" disabled id="updateModal_username"
+                            name="updateModal_username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="updateModal_email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="updateModal_email" name="updateModal_email">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="updateModal_updata_btn">確認</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- updateLevel：MemberLevel -->
+    <div class="modal fade" id="updateLevel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-bg-success">
+                    <h1 class="modal-title fs-3 fw-900" id="exampleModalLabel">更 會員等級</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="updateLevel_username" class="form-label">帳號</label>
+                        <input type="text" class="form-control" disabled id="updateLevel_username"
+                            name="updateLevel_username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="updateLevel_Level" class="form-label">會員等級</label>
+                        <input type="memberLevel" class="form-control" id="updateLevel_Level" name="updateLevel_Level">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="updateLevel_updata_btn">確認</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        var u_id; // for update
+        var newData = []; // for 分頁        
+        $(function () {
+            // 讀取會員資料
+            $.ajax({
+                type: "GET",
+                url: "member-Read-api.php",
+                async: false,
+                dataType: "json",
+                success: showdata,
+                error: function () {
+                    alert("error : member-Read-api.php");
+                }
+            });
+
+            // #update_btn 更新按鈕監聽：Email
+            // $("#mydata #update_btn").click(function () {
+            $("body").on("click", "#mydata #update_btn", function(){
+                console.log($(this).data("id") + $(this).data("email") + $(this).data("username"));
+                u_id = $(this).data("id");
+                $("#updateModal_username").val($(this).data("username"));
+                $("#updateModal_email").val($(this).data("email"));
+            });
+
+            // #update_btn 更新按鈕監聽：MemberLevel
+            // $("#mydata #update_btn").click(function () {
+                $("body").on("click", "#mydata #update_btn", function(){
+                console.log($(this).data("id") + $(this).data("level") + $(this).data("username"));
+                u_id = $(this).data("id");
+                $("#updateLevel_username").val($(this).data("username"));
+                $("#updateLevel_level").val($(this).data("memberlevel"));
+            });
+
+            //delete_btn 刪除按鈕監聽
+            $("body").on("click", "#mydata #delete_btn", function(){
+                console.log("1");
+                if (confirm("確認刪除?")) {
+                    console.log("2");
+                    console.log($(this).data("id"));
+                    //傳遞刪除資料至後端api {"ID":"XX"}
+                    var dataJSON = {};
+                    dataJSON["ID"] = $(this).data("id");
+                    console.log(JSON.stringify(dataJSON));
+
+                    $.ajax({
+                        type: "POST",
+                        url: "member-Delete-api.php",
+                        data: JSON.stringify(dataJSON),
+                        dataType: "json",
+                        success: showdata_delete,
+                        error: function () {
+                            alert("error : member-Delete-api.php");
+                        }
+                    });
+                }
+            });
+
+            // #updateModal_updata_btn 監聽：Email
+            $("#updateModal_updata_btn").click(function () {
+                //傳遞更新資料至後端api {"ID":"XX", "Email":"XXXXX"}
+                var dataJSON = {};
+                dataJSON["ID"] = u_id;
+                dataJSON["Email"] = $("#updateModal_email").val();
+                console.log(JSON.stringify(dataJSON));
+
+                $.ajax({
+                    type: "POST",
+                    url: "member-Update-api.php",
+                    data: JSON.stringify(dataJSON),
+                    dataType: "json",
+                    success: showdata_updata,
+                    error: function () {
+                        alert("error : member-Update-api.php");
+                    }
+                });
+            });
+
+            // #updateLevel_updata_btn 監聽：MemberLevel
+            $("#updateLevel_updata_btn").click(function () {
+                //傳遞更新資料至後端api {"ID":"XX", "MemberLevel":"XXXXX"}
+                var dataJSON = {};
+                dataJSON["ID"] = u_id;
+                dataJSON["MemberLevel"] = $("#updateLevel_level").val();
+                console.log(JSON.stringify(dataJSON));
+
+                $.ajax({
+                    type: "POST",
+                    url: "member-Update-api.php",
+                    data: JSON.stringify(dataJSON),
+                    dataType: "json",
+                    success: showdata_updata,
+                    error: function () {
+                        alert("error : member-Update-api.php");
+                    }
+                });
+            });
+        });
+        function showdata(data) {
+            
+           
+            //整理資料儲存為二維陣列 
+            data.data.forEach(function (item, key) {
+                console.log(key);
+                if (key % 10 == 0) {
+                    newData.push([]);
+                }
+                var page = parseInt(key / 10);
+                newData[page].push(item);
+            });
+                console.log(newData);
+            drawTable(0);
+
+            //產生頁碼，每頁10 筆資料
+            $("#pageList").empty();
+            newData.forEach(function(item, key){
+                var thisPage = key + 1;
+                var strHTML = '<li class="page-item"><a class="page-link" href="#" onclick="drawTable(' + key + ')">'+ thisPage +'</a></li>';
+                $("#pageList").append(strHTML);
+            });
+        }
+
+        function drawTable(page) {
+            $("#mydata").empty();
+            newData[page].forEach(function (item) {
+                var strHTML = '<tr><td>' + item.ID + '</td><td>' + item.Username + '</td><td>' + item.Email + '</td><td>' + item.BloodType + '</td><td>' + item.ChineseZodiac + '</td><td>' + item.Constrllation + '</td><td>' + item.Created_at + '</td><td>' + item.MemberLevel + '</td><td><button class="btn btn-success me-2" data-id="' + item.ID + '" data-email="' + item.Email + '" data-username="' + item.Username + '" id="update_btn"  data-bs-toggle="modal" data-bs-target="#updateModal">更新 Email</button><button class="btn btn-danger" id="delete_btn" data-id="' + item.ID + '">刪除</button></td></tr><button class="btn btn-success me-2" data-id="' + item.ID + '" data-email="' + item.MemberLevel + '" data-username="' + item.Username + '" id="update_btn"  data-bs-toggle="modal" data-bs-target="#updateLevel">更新 會員等級</button>';
+                $("#mydata").append(strHTML);
+            });
+        }
+
+        function showdata_updata(data) {
+            console.log(data);
+            if (data.state) {
+                Swal.fire({
+                    title: "更新完成 !",
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: "確認",
+                    denyButtonText: `Don't save`
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        Swal.fire("Saved!", "", "success");
+                        location.href = "MemberManage.html";
+                    } else if (result.isDenied) {
+                        Swal.fire("Changes are not saved", "", "info");
+                    }
+                });
+            } else {
+                Swal.fire(data.message);
+            }
+        }
+
+        function showdata_delete(data) {
+            console.log(data);
+            if (data.state) {
+                alert(data.message);
+                location.href = "MemberManage.html";
+            } else {
+                alert(data.message);
+            }
+        }
+    </script>
+</body>
+
+</html>

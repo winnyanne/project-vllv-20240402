@@ -1,0 +1,212 @@
+{
+  "吐司": [
+    {
+      "Name": "厚片土司",
+      "Price": "NT$50",
+      "Intro": "新鮮出爐的厚片土司，外酥內軟，適合夾上各種料理或果醬。",
+      "weight": "500克",
+      "kcal": "200大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    },
+    {
+      "Name": "五穀全麥吐司",
+      "Price": "NT$60",
+      "Intro": "富含五穀燕麥的全麥吐司，營養豐富，健康又美味。",
+      "weight": "450克",
+      "kcal": "180大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    },
+    {
+      "Name": "草莓奶油吐司",
+      "Price": "NT$80",
+      "Intro": "特製草莓奶油夾心的吐司，香甜可口，是下午茶的最佳伴侶。",
+      "weight": "400克",
+      "kcal": "250大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    },
+    {
+      "Name": "蒜香牛油吐司",
+      "Price": "NT$55",
+      "Intro": "香氣四溢的蒜香牛油吐司，外皮酥脆，內含濃厚牛油香。",
+      "weight": "480克",
+      "kcal": "220大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    },
+    {
+      "Name": "黑麥麵包",
+      "Price": "NT$70",
+      "Intro": "使用天然黑麥粉製作的麵包，質地緊實，適合搭配各種食材。",
+      "weight": "520克",
+      "kcal": "190大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    }
+  ],
+  "甜麵包": [
+    {
+      "Name": "巧克力蛋糕",
+      "Price": "NT$120",
+      "Intro": "濃郁巧克力風味的蛋糕，柔軟細緻，是巧克力愛好者的最愛。",
+      "weight": "600克",
+      "kcal": "300大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    },
+    {
+      "Name": "提拉米蘇",
+      "Price": "NT$150",
+      "Intro": "經典的提拉米蘇，層次豐富，咖啡香與奶香交織，令人陶醉。",
+      "weight": "550克",
+      "kcal": "280大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    },
+    {
+      "Name": "草莓奶油蛋糕",
+      "Price": "NT$180",
+      "Intro": "新鮮草莓搭配奶油的絕妙組合，清新美味。",
+      "weight": "700克",
+      "kcal": "320大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    },
+    {
+      "Name": "法式果醬可頌",
+      "Price": "NT$90",
+      "Intro": "法式風味的酥皮可頌，內陷搭配精選果醬，口感絕佳。",
+      "weight": "450克",
+      "kcal": "240大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    },
+    {
+      "Name": "焦糖布蕾",
+      "Price": "NT$130",
+      "Intro": "焦糖布蕾的香甜與焦糖的脆感，讓人愛不釋手。",
+      "weight": "500克",
+      "kcal": "280大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    }
+  ],
+  "鹹麵包": [
+    {
+      "Name": "起司法國麵包",
+      "Price": "NT$90",
+      "Intro": "法式風味的麵包，內含香濃起司，外皮酥脆。",
+      "weight": "480克",
+      "kcal": "250大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    },
+    {
+      "Name": "義式橄欖麵包",
+      "Price": "NT$100",
+      "Intro": "義式風味的橄欖麵包，搭配特製橄欖醬，風味獨特。",
+      "weight": "500克",
+      "kcal": "260大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    },
+    {
+      "Name": "蔬菜全麥吐司",
+      "Price": "NT$80",
+      "Intro": "健康的蔬菜全麥吐司，多種蔬菜混合，營養豐富。",
+      "weight": "450克",
+      "kcal": "220大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    },
+    {
+      "Name": "德式豬肉包",
+      "Price": "NT$120",
+      "Intro": "德國風味的豬肉包，內含多種香料，風味濃郁。",
+      "weight": "600克",
+      "kcal": "280大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    },
+    {
+      "Name": "墨西哥辣椒包",
+      "Price": "NT$110",
+      "Intro": "墨西哥風味的辣椒包，辛香開胃，適合喜愛辣味的人。",
+      "weight": "550克",
+      "kcal": "260大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    }
+  ],
+  "歐法麵包": [
+    {
+      "Name": "法式巧克力可頌",
+      "Price": "NT$110",
+      "Intro": "法式風味的巧克力麵包，外酥內軟，巧克力香濃。",
+      "weight": "500克",
+      "kcal": "280大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    },
+    {
+      "Name": "義大利橄欖蓮藕包",
+      "Price": "NT$130",
+      "Intro": "義大利風味的橄欖蓮藕麵包，口感Q彈，風味獨特。",
+      "weight": "550克",
+      "kcal": "300大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    },
+    {
+      "Name": "草莓白巧克力風味吐司",
+      "Price": "NT$150",
+      "Intro": "草莓白巧克力風味的歐法吐司，甜美可口。",
+      "weight": "600克",
+      "kcal": "320大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    },
+    {
+      "Name": "德式黑麥酸麵包",
+      "Price": "NT$100",
+      "Intro": "德國風味的黑麥酸麵包，酸味濃郁，健康美味。",
+      "weight": "480克",
+      "kcal": "260大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    },
+    {
+      "Name": "草莓果醬可頌",
+      "Price": "NT$120",
+      "Intro": "草莓果醬風味的歐法可頌，果香四溢。",
+      "weight": "500克",
+      "kcal": "290大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    }
+  ],
+  "丹麥可頌": [
+    {
+      "Name": "經典牛角包",
+      "Price": "NT$90",
+      "Intro": "經典丹麥可頌牛角包，外皮酥脆，內層分明。",
+      "weight": "480克",
+      "kcal": "220大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    },
+    {
+      "Name": "蜜糖果仁可頌",
+      "Price": "NT$100",
+      "Intro": "蜜糖果仁風味的丹麥可頌，香甜可口。",
+      "weight": "500克",
+      "kcal": "240大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    },
+    {
+      "Name": "草莓忌廉可頌",
+      "Price": "NT$120",
+      "Intro": "草莓忌廉風味的丹麥可頌，奶香搭配草莓酸甜。",
+      "weight": "550克",
+      "kcal": "260大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    },
+    {
+      "Name": "法式巧克力可頌卷",
+      "Price": "NT$110",
+      "Intro": "法式巧克力風味的丹麥可頌卷，巧克力醬搭配多層酥皮。",
+      "weight": "500克",
+      "kcal": "250大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    },
+    {
+      "Name": "杏仁果醬可頌",
+      "Price": "NT$130",
+      "Intro": "杏仁果醬風味的丹麥可頌，杏仁香氣濃郁。",
+      "weight": "600克",
+      "kcal": "280大卡",
+      "ImgURL": "https://fakeimg.pl/600x600/282828/EAE0D0/?text=bread"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>>小學資訊 - 全國分布圖 cluster</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="css/MarkerCluster.css">
+    <style>
+        .marker-cluster-small {
+            background-color: rgba(219, 191, 219, 0.5);
+        }
+
+        .marker-cluster-small div {
+            background-color: rgba(153, 32, 102, 0.7);
+        }
+
+        .marker-cluster-medium {
+            background-color: rgba(63, 223, 22, 0.5);
+        }
+
+        .marker-cluster-medium div {
+            background-color: rgba(23, 78, 27, 0.7);
+        }
+
+        .marker-cluster-large {
+            background-color: rgba(216, 233, 243, 0.5);
+        }
+
+        .marker-cluster-large div {
+            background-color: rgba(21, 53, 88, 0.7);
+        }
+
+        .marker-cluster div {
+            width: 30px;
+            height: 30px;
+            margin-top: 5px;
+            margin-left: 5px;
+            text-align: center;
+            border-radius: 50%;
+            font-size: 14;
+            font-weight: 900;
+        }
+
+        .marker-cluste span {
+            line-height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row vh-100">
+            <div class="col-md-12 bg-warning">
+                <div id="map" class="vh-100"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="js/leaflet.markercluster.js"></script>
+    <script>
+        var allESchoolData = [];       // 全國 小學 資料
+        var map;
+        var markers;
+        $(function () {
+            //draw map 
+            map = L.map('map').setView([24.171477, 120.609643], 8);
+
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            markers = new L.markerClusterGroup().addTo(map);
+
+            // 載入 全國小學資料
+            axios.get('js/All-E-School.json')
+                .then(function (response) {
+                    // handle success
+                    console.log(response.data.features);
+                    allESchoolData = response.data.features;
+                    allESchoolData.forEach(function (item, key) {
+
+                        //加上水滴座標
+                        var lat = item.geometry.coordinates[1];
+                        var lng = item.geometry.coordinates[0];
+
+                        var popupHTML = '<div class="card"><div class="card-body"><h4>' + item.properties.name + '</h4><h5>地址: ' + item.properties.address + '</h5><h5>電話: ' + item.properties.phone + '</h5><h5>成人口罩: <span class="text-danger h4 fw-900">' + item.properties.mask_adult + '</span>個</h5><h5>兒童口罩: <span class="text-success h4 fw-900">' + item.properties.mask_child + '</span>個</h5></div></div>';
+                        markers.addLayer(L.marker([lat, lng]).bindPopup(popupHTML));
+                    });
+                })
+
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            
+            .finally(function () {
+                // always executed
+            });
+
+        });
+    </script>
+</body>
+
+</html>

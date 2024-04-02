@@ -1,0 +1,63 @@
+.d {
+    &-none {
+      display: none;
+    }
+  }
+  :root {
+    --mySelect_w: 200px;
+    --mySelect_h: 40px;
+  }
+  
+  @-webkit-keyframes fa-spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes fa-spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  //修改大小請在自己的主要css中的:root{}覆寫--mySelect_w/--mySelect_h兩個變數即可
+  .mySelect-wrap {
+    display: flex !important;
+    position: relative;
+    width: var(--mySelect_w);
+    height: var(--mySelect_h);
+  
+    &:has(select[disabled])::after {
+      color: gray;
+      -webkit-animation: fa-spin 1s infinite steps(8);
+      animation: fa-spin 1s infinite steps(8);
+    }
+  
+    &::after {
+      content: attr(data-status);
+      align-self: center;
+      position: absolute;
+      right: 10px;
+      pointer-events: none;
+    }
+  }
+  
+  .mySelect {
+    flex-grow: 1;
+    appearance: none; //取消原始的箭頭
+    -webkit-appearance: none; //取消原始的箭頭
+    outline: none; //取消select選取時的外框線
+    border-radius: 5px;
+  }
+  

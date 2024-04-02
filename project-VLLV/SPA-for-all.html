@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>member-SPA-0311</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/myall.css">
+    <style>
+        /*****************  以下為 : 主選單 固定 在 右側  的 CSS  *********************/
+
+        .menu-container { /* 整個選單容器 */
+            position: fixed;                            /* 固定位置 */
+            top: 15%;                                   /* 上方距離為10% */
+            right: 0;                                   /* 靠右 */
+            width: 100px;                            
+            background-color: rgba(255, 255, 255, 0.3);     /* 透明背景 */
+            border-radius: 20px;
+            margin-right: 20px;
+            z-index: 1000;                              /* 堆疊順序，設定較高以確保選單位於最上層 */
+            box-shadow:  0 0 15px 0 #00000047;
+        }
+     
+        .menu-item { /* 選項樣式 */
+            list-style-type: none;          /* 移除預設符號 */
+            text-align: center;
+        }
+    
+        .menu-item a { /* 選項連結樣式 */
+            font-size: 20px;         
+            margin: 5px;
+            text-decoration: none;          /* 移除連結底線 */
+            color: black;                 /* 文字顏色 */
+        }
+
+        .menu-item a:hover { /* 當滑鼠移至選項上時，文字會變成粗體紅色 */
+            font-weight: bold;
+            color: red;
+        }
+
+        /**********  以下為 section 04  人數：時間軸的位移  **********/
+
+        a {
+            text-decoration: none;
+        }
+
+        .carousel-caption { /*  section 04  人數：遮色片 */
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-section::before {
+            position: absolute;
+            content: "";
+            top: 0;
+            bottom: 0;
+            width: 10px;
+            background-image: linear-gradient(45deg, rgba(53, 30, 184, 0.05), rgba(13, 48, 201, 0.7));
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-section-pointer {
+            position: relative;
+        }
+
+        .timeline-section-pointer::before {
+            position: absolute;
+            content: "";
+            width: 25px;
+            height: 25px;
+            background-color: #fff;
+            top: 0;
+            border-radius: 50%;
+            border: 8px solid #00ffff;
+        }
+
+        .timeline-section-pointer:hover::before {
+            width: 30px;
+            height: 30px;
+            background-color: #fff;
+            border: 8px solid #ff0000;
+        }
+
+        @media screen and (max-width: 768px) {
+
+            .timeline-section::before {
+                position: absolute;
+                content: "";
+                top: 0;
+                bottom: 0;
+                width: 10px;
+                background-image: linear-gradient(45deg, rgba(53, 30, 184, 0.05), rgba(255, 1, 1, 0.7));
+                left: 10px;
+                transform: translateX(-50%);
+            }
+
+            .timeline-section-pointer::before {
+                position: absolute;
+                content: "";
+                width: 25px;
+                height: 25px;
+                background-color: #fff;
+                top: 0;
+                left: 10px;
+                border-radius: 50%;
+                border: 8px solid #ff0303;
+            }
+
+            .timeline-section-pointer:hover::before {
+                width: 30px;
+                height: 30px;
+                left: 10px;
+                background-color: #fff;
+                border: 8px solid #00ffff;
+            }
+        }
+
+        /**********  以下為 section 08  照片  **********/
+
+        .section_08_body { /*  section 08 照片：內容在水平和垂直方向上都置中對齊，並根據其內容的大小調整元素的高度，同時消除任何預設邊距。  */
+            display: flex;              /*  將元素設定為彈性盒子，使得其子元素能夠使用彈性盒模型的屬性來排列。  */
+            justify-content: center;    /*  水平居中對齊元素的子元素。  */
+            align-items: center;        /*  垂直居中對齊元素的子元素。  */
+            height: fit-content;        /*  元素的高度將根據其內容的大小進行調整，以適應內容的高度。  */
+            margin: 0;                  /*  將元素的邊距設置為零，消除任何可能存在的預設邊距。  */
+            max-width: 1000px;
+            padding: 0;
+
+        }
+
+        .section_08_table img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            /* border-collapse: collapse;
+            width: 100%;
+            max-width: 1000px; */
+            /* 調整最大寬度 */
+            /* 添加其他表格樣式 */
+        }
+
+        td {
+            text-align: center;
+            vertical-align: middle;
+            padding: 3px;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            margin: auto;
+        }
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        #enlarged-image {
+            max-width: 60%;
+            max-height: 90%;
+            border: 2px solid white;
+        }
+        /**********  以下為  section 10  成員  **********/
+
+        .circle-box { /*  section 10  成員：圓型框 */
+            width: 200px;       /* 設定圓形框的寬度 */
+            height: 200px;      /* 設定圓形框的高度 */
+            border-radius: 50%; /* 將邊框的四個角切成圓角，實現圓形效果 */
+            line-height: 200px;
+            overflow: hidden;   /* 讓超出框的部分隱藏 */
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+        }
+
+        .page_footer {
+            background-color: #ffffa2;
+            vertical-align: middle;
+            margin-top: 20px;
+            padding-top: 30px;
+            padding-bottom: 20ps;
+            width: 100%;
+            height: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .outsideLink { /* section 15  網站：外網logo */
+            display: block;
+            width: 80px;
+            aspect-ratio: 1;
+        }
+
+        /**********  以下為 section 08  照片  **********/
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(7, 150px);
+            grid-template-rows: repeat(5, 100px);
+            /* align-items: center; */
+            margin-top: 10px;
+            margin-bottom: 10px;
+            gap: 10px;
+            justify-content: center;
+        }
+        .grid-item {
+            position: relative;
+            overflow: hidden;
+            width: 150px;
+            height: 100px;
+        }
+        .grid-item img {
+            object-fit: cover; /* 調整填充方式，保持比例填充 */
+            width: 100%;
+            height: 100%;
+        }
+        #overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                justify-content: center;
+                align-items: center;
+                z-index: 100; /* 設置一個比其他圖片更高的值 */           
+            }
+        #enlarged-image {
+            max-width: 60%;
+            max-height: 90%;
+            border: 2px solid white;
+            z-index: 101; /* 設置一個比overlay更高的值 */
+        }
+
+    </style>
+</head>
+<body>
+    <!-- section 0-1；主選單 + 登入 與 註冊  -->
+    <section>
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark align-items-end">
+            <div class="container" style="padding-top: 20px;display: flex; align-items: center;">
+                <a class="navbar-brand" href="#"><i class="fa-solid fa-heart text-danger wow animate__heartBeat" 
+                   data-wow-duration="1s" data-wow-delay="0s" data-wow-iteration="infinite" style="font-size: 50px;"></i></a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div style="font-size: 50px;">
+                        <span class="text-warning" id="user_message">&emsp;</span>
+                        <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#loginModal" style="font-size: 30px;" id="s02_login_btn"> 登入 </button>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal" style="font-size: 30px; margin-left: 5px;" id="s02_reg_btn" >註冊 </button>
+                        <button class="btn btn-danger  d-none" style="font-size: 30px;" id="s02_member_only">
+                            <a style="color: #ffffff; font-size: 30px;" href="Member-Only/0-memberOnly.html">會員專區</a></button>
+                        <button class="btn btn-success d-none"  style="font-size: 30px;" id="s02_logout_btn"> 登出 </button>
+                    </div>
+                </div>
+            </div>
+        </nav> 
+        <!-- 主選單 固定 在 右側  -->
+        <div class="menu-container">
+            <ul class="menu m-0 pt-2 pb-2 ps-0">
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s01">頁首</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s02">簡介</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s03">回顧</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s04">人數</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s05">課程</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s06">告白</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s07">加油</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s08">照片</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s09">短片</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s10">成員</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s11">報導</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s12">觀課</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s13">地圖</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s14">加入</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s15">本站</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#s16">連結</a></li>
+            </ul>
+        </div>
+    </section>
+    <!-- section 0-2 登入login -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="margin-top: 200px;">
+                <div class="modal-header text-bg-warning">
+                    <h1 class="modal-title fs-5 fw-900" id="exampleModalLabel">會員登入</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="" class="form-label">帳號</label>
+                        <input type="text" class="form-control" id="login_username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">密碼</label>
+                        <input type="password" class="form-control" id="login_password">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="login_btn">確認</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- section 0-3 註冊 register -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content" style="margin-top: 120px;">
+                <div class="modal-header text-bg-primary">
+                    <h1 class="modal-title fs-5 fw-900" id="exampleModalLabel">會員註冊</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6"> <!-- section 0-3 輸入 註冊資料：帳號、密碼 -->
+                            <div class="mb-3">
+                                <label for="username" class="form-label">帳號</label>
+                                <input type="text" class="form-control" placeholder="字數 : 4 ~ 12 字" id="username"
+                                    name="username">
+                                <div class="valid-feedback">帳號長度 符合規則 : 4 ~ 12 字</div>
+                                <div class="invalid-feedback">帳號長度 不符合規則</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">密碼</label>
+                                <input type="text" class="form-control" placeholder="字數 : 5 ~ 10 字" id="password"
+                                    name="password">
+                                <div class="valid-feedback">密碼長度 符合規則 : 5 ~ 10 字</div>
+                                <div class="invalid-feedback">密碼長度 不符合規則</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="re_password" class="form-label">確認 密碼</label>
+                                <input type="text" class="form-control" placeholder="字數 : 4 ~ 10 字" id="re_password"
+                                    name="re_password">
+                                <div class="valid-feedback">密碼 輸入正確</div>
+                                <div class="invalid-feedback">請再次確認 您的密碼</div>
+                            </div>
+                        </div>
+                        <!-- 輸入 註冊資料：Email，選擇 血型、生肖、星座 select -->
+                        <div class="col-6">
+                            <div class="mb-3"> <!-- 選擇 血型 select -->
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="text" class="form-control" placeholder="字數 : 1 ~ 10 字" id="email"
+                                        name="email">
+                                    <div class="valid-feedback">Email 符合規則 : 1 ~ 10 字</div>
+                                    <div class="invalid-feedback">Email 不符合規則</div>
+                                </div>
+                                <select name="BloodType" id="BloodType" class="form-select" style="width: auto; min-width: 100px; max-width: 200px;">
+                                    <option selected disabled>---選擇 血型---</option>
+                                    <option value="Ａ型">A 型</option>
+                                    <option value="AB型">AB 型</option>
+                                    <option value="Ｂ型">B 型</option>
+                                    <option value="Ｏ型">O 型</option>
+                                </select>
+                                <div class="valid-feedback">已選擇 血型</div>
+                                <div class="invalid-feedback">尚未 選擇 血型</div>
+                            </div>
+                            <div class="mb-3"> <!-- 選擇 生肖 select -->
+                                <select name="ChineseZodiac" id="ChineseZodiac" class="form-select" style="width: auto; min-width: 100px; max-width: 200px;">
+                                    <option selected disabled>---選擇 生肖---</option>
+                                    <option value="01 鼠">鼠</option>
+                                    <option value="02 牛">牛</option>
+                                    <option value="03 虎">虎</option>
+                                    <option value="04 兔">兔</option>
+                                    <option value="05 龍">龍</option>
+                                    <option value="06 蛇">蛇</option>
+                                    <option value="07 馬">馬</option>
+                                    <option value="08 羊">羊</option>
+                                    <option value="09 猴">猴</option>
+                                    <option value="10 雞">雞</option>
+                                    <option value="11 狗">狗</option>
+                                    <option value="12 豬">豬</option>
+                                </select>
+                                <div class="valid-feedback">已選擇 生肖</div>
+                                <div class="invalid-feedback">尚未 選擇 生肖</div>
+                            </div>
+                            <div class="mb-3"> <!-- 選擇 星座 select -->
+                                <select name="Constrllation" id="Constrllation" class="form-select" style="width: auto; min-width: 100px; max-width: 200px;">
+                                    <option selected disabled>---選擇 星座---</option>
+                                    <option value="01/20-02/18 水瓶座">01/20-02/18 水瓶座</option>
+                                    <option value="02/19-03/20 雙魚座">02/19-03/20 雙魚座</option>
+                                    <option value="03/21-04/19 牡羊座">03/21-04/19 牡羊座</option>
+                                    <option value="03/21-04/19 金牛座">04/20-05/20 金牛座</option>
+                                    <option value="05/21-06/21 雙子座">05/21-06/21 雙子座</option>
+                                    <option value="06/22-07/22 巨蟹座">06/22-07/22 巨蟹座</option>
+                                    <option value="07/23-08/22 獅子座">07/23-08/22 獅子座</option>
+                                    <option value="08/23-09/22 處女座">08/23-09/22 處女座</option>
+                                    <option value="09/23-10/23 天秤座">09/23-10/23 天秤座</option>
+                                    <option value="10/24-11/22 天蠍座">10/24-11/22 天蠍座</option>
+                                    <option value="11/23-12/21 射手座">11/23-12/21 射手座</option>
+                                    <option value="12/22-01/19 魔羯座">12/22-01/19 魔羯座</option>
+                                </select>
+                                <div class="valid-feedback">已選擇 星座</div>
+                                <div class="invalid-feedback">尚未 選擇 星座</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- section 0-3 會員守則 -->
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="h5">會員守則</div>
+                            <div style="padding-left: 50px; font-size: 12px;">
+                                <p>尊重他人：尊重其他會員、管理員，不發表冒犯性的言論，並保持良好的互動風格。<br>
+                                <p>保護個資：不要公開或分享其他會員的個人資訊，包括但不限於電子郵件地址、聯絡方式或其他敏感信息。<br>
+                                <p>遵守法紀：遵守所有相關的法律、法規，包括但不限於版權法、隱私法...等。不發表非法或侵犯他人權利的內容。<br>
+                                <p>珍惜資源：不濫用會員資源，包括但不限於洗版、垃圾郵件、或其他對社區運作造成不利影響的行為。<br>
+                                <p>積極參與：分享有價值的內容，並協助維護良好的網路氛圍。尊重本站規定，並與其他會員建立積極的互動。</p>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-check" style="font-size: 36px; padding-top: 150px;">                              
+                                <input class="form-check-input" type="checkbox" value="" id="chk01" name="chk01">
+                                <label class="form-check-label wow animate__heartBeat" data-wow-duration="1s"
+                                    data-wow-delay="0s" data-wow-iteration="infinite" for="chk01"
+                                    style="color: green;">同意</label>                           
+                            </div>
+                        </div>
+                    </div>                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="reg_btn">註冊</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- section 01 頁首 : 動畫  -->
+    <section id="s01" style="background-color: #000;">
+        <div class="container" style="height: 100vh;">
+            <div class="row" style="height: 15vh;"></div> <!--  等於是 margin-top  -->
+            <div class="row" style="height: 10vh;">
+                <div class="col-1"></div>
+                <div class="col-10" style="font-size: 60px; font-weight:500; color: #e497ee;">
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-5">
+                            <div class="row">
+                                <div class="col-3"></div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="1.0s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">情</div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="1.2s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">感</div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="1.4s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">教</div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="1.6s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">育</div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="row">
+                                <div class="col-1"></div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="1.8s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">課</div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="2.0s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">程</div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="2.2s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">活</div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="2.4s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">動</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center" style="height: 10vh;">
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <div class="row" style="font-size:50px; font-weight:600; color:#d69898; padding-top:25px;">
+                        <div class="col-4 text-center">
+                            <div class="row">
+                                <div class="col-1"></div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="2.6s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">提</div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="2.8s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">升</div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="3.0s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">青</div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="3.2s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">少</div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="3.4s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">年</div>
+                            </div>
+                        </div>
+                        <div class="col-4 text-center">
+                            <div class="row">
+                                <div class="col-1"></div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="3.6s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">挫</div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="3.8s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">折</div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="4.0s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">耐</div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="4.2s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">受</div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="4.4s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">力</div>
+                            </div>
+                        </div>
+                        <div class="col-4 text-center">
+                            <div class="row">
+                                <div class="col-1"></div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="4.6s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">談</div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="4.8s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">情</div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="5.0s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">說</div>
+                                <div class="col-2 wow animate__backInRight" data-wow-duration="5.2s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">愛</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center" style="height: 15vh;">
+                <div class="text-center" style="font-size: 20px; font-weight:300; color: #e6eb9b; padding-top:30px;">
+                    <p class="wow animate__backInRight" data-wow-duration="10s" data-wow-delay="0s"
+                        data-wow-iteration="1" style="animation-fill-mode:forwards; padding-bottom: 30px;">
+                        Improve&emsp;the&emsp;Frustration&emsp;tolerance&emsp;of&emsp;Youth&emsp;&emsp;by&emsp;&emsp;Talking&emsp;About&emsp;Love
+                        &emsp;&emsp;&&emsp;&emsp;Vaccinate&emsp;a&emsp;Lovelorn&emsp;Vaccine&emsp;&emsp;&emsp;&emsp;Sincs&emsp;2013
+                    </p>
+                </div>
+            </div>
+            <div class="row" style="height: 35vh;">
+                <div class="col-1"></div>
+                <div class="col-10" style="font-size: 100px; font-weight: 600; color: #a7d8de;">
+                    <div class="row">
+                        <div class="col-5 text-center">
+                            <div class="row" style="padding-top: 25px;">
+                                <div class="col-3 wow animate__backInRight" data-wow-duration="5.4s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">接</div>
+                                <div class="col-3 wow animate__backInRight" data-wow-duration="5.6s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">種</div>
+                                <div class="col-3 wow animate__backInRight" data-wow-duration="5.8s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">一</div>
+                                <div class="col-3 wow animate__backInRight" data-wow-duration="6.0s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">劑</div>
+                            </div>
+                        </div>
+                        <div class="col-2 text-center" style="padding-top: 25px; padding-bottom: 30px;">
+                            <div class="row">
+                                <div class="col-1"></div>
+                                <div class="col-10">
+                                    <div class="wow animate__backInUp" data-wow-duration="10s" data-wow-delay="0s"
+                                        data-wow-iteration="1">
+                                        <img style="border-radius: 50%;" src="img/logo-w-401.jpg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5 text-center">
+                            <div class="row" style="padding-top: 25px;">
+                                <div class="col-3 wow animate__backInRight" data-wow-duration="6.2s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">失</div>
+                                <div class="col-3 wow animate__backInRight" data-wow-duration="6.4s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">戀</div>
+                                <div class="col-3 wow animate__backInRight" data-wow-duration="6.6s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">疫</div>
+                                <div class="col-3 wow animate__backInRight" data-wow-duration="6.8s" data-wow-delay="0s"
+                                    data-wow-iteration="1" style="animation-fill-mode:forwards">苗</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1"></div>
+            </div>
+            <div class="row" style="height: 10vh;"></div> <!--  等於是 margin-buttom  -->
+        </div>
+    </section>
+    <!-- section 02 簡介人數：背景圖固定不變 與 counter -->
+    <section id="s02" class="container-fluid" style="height: 100vh; background: linear-gradient(to bottom, #000000, #a90f3b)"> 
+        <div class="row align-items-center text-center mb-5">
+            <div class="col-md-4" style="background-image: url(img/section-04.jpg); height: 100vh; 
+                        background-attachment: fixed; background-size: cover; background-position: left;">
+            </div>
+            <div class="col-md-4" style="margin-bottom: 20px; color: #dcd9da">
+                <h4 class="mb-5 fw-500" style="line-height: 1.5; letter-spacing: 1px;"><br>
+                    「失戀疫苗」課程活動&emsp;在<br>惠來國小&emsp;已經陪伴&emsp;六屆<br>應屆畢業學生&emsp;完成接種<br>
+                    課程規劃 為：應屆畢業 各班<br>均有 12 堂 教室課&emsp;此乃 醞釀期<br>
+                    是在為&emsp;全體畢業生&emsp;於<br>畢業考 結束後、畢業典禮 舉行前<br>最後 3 小時&emsp;的<br>「 告白練習 」&emsp;做準備<br>
+                </h4>
+                <div class="row text-left">
+                    <p class="h5" style="color: #e2e69d;">已完成接種&emsp;學生人數：<span class="h2 fw-900 text-white counter01">&emsp;839 人</span></p>
+                    <p class="h5" style="color: #e2e69d;">班導師家長&emsp;參與人數：<span class="h2 fw-900 text-white counter02">&emsp;192 人</span></p>
+                    <p class="h5" style="color: #e2e69d;">告白教練&emsp;&emsp;參與人次：<span class="h2 fw-900 text-white counter03">&emsp;159 人</span></p>
+                    <p class="h5" style="color: #e2e69d;">曾參與 課程活動 總人次：<span class="h2 fw-900 text-white counter04"> 1192 人</span></p>
+                </div>
+            </div>
+            <div class="col-md-4" style="background-image: url(img/section-04.jpg); height: 100vh; 
+                        background-attachment: fixed; background-size: cover; background-position: right;">
+            </div>
+        </div>
+    </section>
+    <!-- section 03 回顧：自動換頁 幻燈片 -->
+    <section id="s03" class="container-fluid" style="height: 100vh; background: linear-gradient(to bottom, #a90f3b, #d86a8a)">     
+        <div class="container" style="width: 100%; padding-top: 6%; padding-bottom: 20px;">
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+                <div id="carouselExampleCaptions" class="carousel slide">
+                    <div class="carousel-indicators">       <!-- 有五個按鈕，分別對應到輪播中的五張圖片 -->
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+                            aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4"
+                            aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner" style="border-radius: 5%;">
+                        <div class="carousel-item bg-cover active" style="background-image: url(img/slide-2013.jpg); height: 80vh;">
+                            <div class="carousel-caption d-none d-md-block p-4 rounded-5 shadow-sm">
+                                <h3 class="fw-600 text-warning">【第一代 失戀疫苗 全體教練 及 輔導室主任】</h3>
+                                <p style="font-size: 50px; color: #03fff2;"> 2013</span></p>
+                            </div>
+                        </div>
+    
+                        <div class="carousel-item bg-cover" style="background-image: url(img/slide-2018.jpg); height: 80vh;">
+                            <div class="carousel-caption d-none d-md-block p-4 rounded-5 shadow-sm">
+                                <h3 class="fw-600 text-warning">【第二代 失戀疫苗 全體教練】</h3>
+                                <p style="font-size: 50px; color: #03fff2;"> 2018</span></p>
+                            </div>
+                        </div>
+    
+                        <div class="carousel-item bg-cover" style="background-image: url(img/slide-2019.jpg); height: 80vh;">
+                            <div class="carousel-caption d-none d-md-block p-4 rounded-5 shadow-sm">
+                                <h3 class="fw-600 text-warning">【第三代 失戀疫苗 全體教練】</h3>
+                                <p style="font-size: 50px; color: #03fff2;"> 2019</span></p>
+                            </div>
+                        </div>
+    
+                        <div class="carousel-item bg-cover" style="background-image: url(img/slide-2019-Senior.jpg); height: 80vh;">
+                            <div class="carousel-caption d-none d-md-block p-4 rounded-5 shadow-sm">
+                                <h4 class="fw-600 text-warning">【第三代 失戀疫苗 即將成為 大學新鮮人 的 學長姐 返校擔任 告白助教】</h4>
+                                <p style="font-size: 50px; color: #03fff2;">學長姐們 與 班導師 合影 2019</span></p>
+                            </div>
+                        </div>
+    
+                        <div class="carousel-item bg-cover" style="background-image: url(img/slide-2023.jpg); height: 80vh;">
+                            <div class="carousel-caption d-none d-md-block p-4 rounded-5 shadow-sm">
+                                <h3 class="fw-600 text-warning">【第六代 失戀疫苗 全體教練】</h3>
+                                <p style="font-size: 50px; color: #03fff2;"> 2023</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div> 
+        </div>         
+    </section>
+    <!-- section 04 人數：排版、遮色片、時間軸的位移 -->
+    <section id="s04" class="container-fluid" style="height: 100vh; background: linear-gradient(to bottom, #d86a8a, #d198a8)">
+        <div class="container" style="padding-top: 3%;"> <!--  container": 容器是用來 簡化頁面佈局 的 元素，並且 它會根據 螢幕的大小 自動調整寬度 -->
+            <div class="row align-items-center">
+                <div class="col-md-11">     <!-- col-md-11 表示這個元素佔據整個行寬度的 11/12  -->
+                    <div class="timeline-section">
+                        <div class="row mt-3 justify-content-center align-items-center timeline-section-pointer">
+                            <div class="col-md-5 text-center text-white h5" style="margin-right: 15px;">
+                                <div class="wow animate__bounceInLeft" data-wow-duration="3s" data-wow-delay="0s"
+                                    data-wow-iteration="1">
+                                    <div class="text01" style="background-color: rgba(0, 0, 0, 0.5);border-radius: 20px;">
+                                        <div class="fw-900" style="padding-top: 20px;">2013 第一代 失戀疫苗</div>
+                                        <p>應屆畢業生 共四班</p>
+                                        <ul class="list-unstyled">
+                                            <li>男學生 : 47 人、女學生 : 45 人</li>
+                                            <li style="padding-bottom: 20px;">告白教練 : 10 人，參與總人數 : 102 人</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 wow animate__bounceInRight" data-wow-duration="3s" data-wow-delay="0s" data-wow-iteration="1">
+                                <div class="bg-cover" style="height: 150px; float: left;"><img src="img/slide-2013.jpg" alt=""></div>
+                            </div>
+                        </div>                                                                             <!-- flex-row-reverse : 將本row 左右反置 -->
+                        <div class="row mt-3 justify-content-center align-items-center timeline-section-pointer flex-row-reverse">
+                            <div class="col-md-5 text-center text-white h5 wow animate__bounceInLeft"   
+                                data-wow-duration="3s" data-wow-delay="1s" data-wow-iteration="1">
+                                <div class="text01"
+                                    style="background-color: rgba(0, 0, 0, 0.5); border-radius: 20px; margin-left: 10px;">
+                                    <div class="fw-900" style="margin-right: 15px; padding-top: 20px;">2018 第二代 失戀疫苗</div>
+                                    <p>應屆畢業生 共六班</p>
+                                    <ul class="list-unstyled">
+                                        <li>男學生 : 72 人、女學生 : 68 人</li>
+                                        <li style="padding-bottom: 15px;">告白教練 : 33 人，參與總人數 : 177 人</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-5 wow animate__bounceInRight" data-wow-duration="3s" data-wow-delay="1s" data-wow-iteration="1">
+                                <div class="bg-cover" style="height: 150px; float: right; margin-right: 20px;"><img src="img/slide-2018.jpg" alt=""></div>
+                            </div>
+                        </div>
+                        <div class="row mt-3 justify-content-center align-items-center timeline-section-pointer">
+                            <div class="col-md-5 text-center text-white h5 wow animate__bounceInRight"
+                                data-wow-duration="3s" data-wow-delay="2s" data-wow-iteration="1"
+                                style="margin-right: 15px;">
+                                <div class="text01" style="background-color: rgba(0, 0, 0, 0.5); border-radius: 20px;">
+                                    <div class="fw-900" style="padding-top: 20px;">2019 第三代 失戀疫苗</div>
+                                    <p>應屆畢業生 共七班</p>
+                                    <ul class="list-unstyled">
+                                        <li>男學生 : 94 人、女學生 : 90 人</li>
+                                        <li style="padding-bottom: 20px;">告白教練 : 38 人，參與總人數 : 222 人</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-5 wow animate__bounceInLeft" data-wow-duration="3s" data-wow-delay="2s"
+                                data-wow-iteration="1">
+                                <div class="bg-cover" style="height: 150px; float: left; margin-left: 15px;"><img src="img/slide-2019.jpg" alt=""></div>
+                            </div>
+                        </div> <!-- flex-row-reverse : 將本row 左右反置 -->
+                        <div
+                            class="row mt-3 justify-content-center align-items-center timeline-section-pointer flex-row-reverse">
+                            <div class="col-md-5 text-center text-white h5 wow animate__bounceInLeft"
+                                data-wow-duration="3s" data-wow-delay="3s" data-wow-iteration="1">
+                                <div class="text01"
+                                    style="background-color: rgba(0, 0, 0, 0.5); border-radius: 20px; margin-left: 10px;">
+                                    <div class="fw-900" style="padding-top: 20px;">2023 第六代 失戀疫苗</div>
+                                    <p>應屆畢業生 共五班</p>
+                                    <ul class="list-unstyled">
+                                        <li>男學生 : 64 人、女學生 : 74 人</li>
+                                        <li style="padding-bottom: 20px;">告白教練 : 30，參與總人數 : 168 人</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-5 wow animate__bounceInRight" data-wow-duration="3s" data-wow-delay="3s"
+                                data-wow-iteration="1">
+                                <div class="bg-cover" style="height: 150px; float: right; margin-right: 20px; margin-bottom: 20px;"><img src="img/slide-2023.jpg" alt=""></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section 05 課程：切版 + 動畫 -->
+    <section id="s05" class="container-fluid py-5" style="height: 100vh; background: linear-gradient(to bottom, #d198a8, #e0b3c9)">
+        <div class="container pt-5">
+            <div class="row">
+                <div class="col-md-5 text-left fw-900 wow animate__bounceInLeft" data-wow-duration="3s" data-wow-delay="0s" data-wow-iteration="infinite" style="font-size: 40px; padding-top: 30px;">
+                    <i class="fa-solid fa-person-chalkboard fa-8x text-primary"></i>
+                </div>
+                <div class="col-md-6 text-left" style="padding-top: 60px;">
+                    <p class="text-primary fw-900" style="font-size: 60px;">課程：<span class="text-primary" style="font-size: 40px;">設計理念、課程內容</span></p>
+                    <p class="text-dark fw-500" style="font-size: 40px;">學習單、投影片、各獎項 的設置</p><br><br>
+                    <h3 class="fw-900 text-left" style="color: #070384; font-size: 40px;">【 活動方式 How 】</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-left fw-900" style="padding-top: 30px; padding-right: 20px; padding-bottom: 50px;">
+                    <h3 class="fw-900 text-center" style="color: #070384; font-size: 40px;">【 設計理念 Why 】</h3><br>
+                    <h4>&emsp;&emsp;為情自殺及他殺事件 時有所聞，失戀 輕則 影響日常生活，重則 傷害生命。因此 在 學生進入青少年階段 之前，引導同學們 學習 互動時 合宜的應對，對孩子們 進入 青春期後的同儕關係 不僅會有 正面的影響，相信對其 未來人生的 幸福感 也會有 加分的作用。</h4><br>
+                </div>
+                <div class="col-md-7 text-left fw-900" style="padding-top: 30px; padding-left: 20px;">
+                    <h4>&emsp;&emsp;課程 從 引導學生瞭解自己 開始，從 自己的感受 出發，藉此 發展出 同理心。引導學生去思考：在「告白」的過程中，怎樣的應對 比較合宜？怎樣的話語 不僅能 準確地傳達自己想表明的心意，同時 也不會造成 自己或對方的困擾。各班的課程 採用 分組競賽的方式 進行，同學們需 討論統整、上台報告，更要身兼 裁判的身分，仔細聆聽 同學的報告，以便完成 評分的工作，藉此 培養學生們 傾聽的能力。<br><br>&emsp;&emsp;學生們 年紀尚小，在 猶如 辦家家酒 的 告白遊戲 中 被拒絕，容易從 小小的挫折 中 復原。以此「復原的經驗」做為 日後人生中 若又有其他「類似事件」的「康復基礎」便是「失戀疫苗」的原理。</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section 06 告白：切版 + 動畫 -->
+    <section id="s06" class="container-fluid py-5" style="height: 100vh; background: linear-gradient(to bottom, #e0b3c9, #e4d6dd)">
+        <div class="container pt-5">
+            <div class="row" style="padding-top: 30px;">
+                <div class="col-md-3 text-left fw-900">
+                    <h3 class="fw-900 text-danger text-left" style="font-size: 40px;">接種對象 Who</h3><br>
+                    <h4 style="text-align: justify;">&emsp;&emsp;本課程 是為 即將脫離 兒童階段 的 國小應屆畢業生 所設計，將 全年級學生 齊聚一堂，以「扮家家酒」或「演戲」的心情，每個人 都必須 向一位 沒有血緣關係 的 異性同學「練習告白、體驗被拒絕」以及「體驗被告白、練習 合宜地拒絕他人」。
+                    <br><br>&emsp;&emsp;因為 所有的同學 也都被拒絕了！所以 自己的「被拒絕」就沒有那麼丟臉，如此 可大大降低 此次「失戀」所引發的「挫折感」可能造成的傷害程度，類似於 製作疫苗時 極弱化「病原微生物毒性」的作法。</h4><br><br>
+                </div>
+                <div class="col-md-4 fw-900 text-center">
+                    <div class="wow animate__shakeX" data-wow-duration="2s" data-wow-delay="0s"
+                        data-wow-iteration="infinite" style="font-size: 40px;">
+                        <i class="fa-solid fa-people-arrows fa-8x text-danger"></i>
+                    </div>
+                    <h1 class="text-danger my-4" style="font-size: 60px;">告白練習</h1>
+                    <h3 class="text-danger my-4" style="font-size: 40px;">接種一劑<br>失戀疫苗</h3>
+                    <p class="text-dark" style="font-size: 40px;">學習 合宜的拒絕<br>體驗 被拒絕</p>
+                </div>
+                <div class="col-md-4 text-left fw-900">
+                    <h3 class="fw-900 text-danger text-left" style="font-size: 40px;">接種時機 When</h3><br>
+                    <h4 style="text-align: justify;">&emsp;&emsp;每年十月 是 進入施打「流感疫苗」的季節，在班級及校園內 開始流行 配對遊戲、同學之間的情愫 開始萌芽之際，會是接種「失戀疫苗」的 適當時機。
+                    <br><br>&emsp;&emsp;由於 有些同學 可能會找 自己喜歡的對象 進行 告白練習，為避免 事後的 尷尬期 過長，若在活動之後 能有 一整個暑假 的 沉澱、以及 新校園 的 環境轉換，將最為理想。
+                    <br><br>&emsp;&emsp;所以 接種「失戀疫苗」的時間 以「畢業考 結束後、畢業典禮 舉行前」最為適合。</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section 07 加油：邱版、動畫 -->
+    <section id="s07" class="container-fluid py-5" style="height: 100vh; background: linear-gradient(to bottom, #e4d6dd, #a3daa7)">
+        <div class="container">
+            <div class="row" style="padding-top: 30px;">
+                <div class="col-md-6 text-left fw-900">
+                    <p class="fw-900 text-center" style="color: #022d00; font-size: 40px;">【 課程目標 What 】</p><br>
+                    <h5 style="text-align: justify;">&emsp;&emsp;培養學生：自學、共學、思考、表達、傾聽、裁判 等六種帶得走的能力與習慣。讓學生：更加瞭解自己、願意和別人分享自己的心事、曉得 收送禮物時的注意事項、能專心聆聽 他人的報告、知道「愛」是什麼、知道 表達情意 的五種愛之語、知道如何擁有「愛」的能力、知道「愛自己」的重要性、明白「應對合宜」的重要性、瞭解 疫苗的原理、知道「失戀疫苗」是什麼、擁有 上台報告的勇氣。<br>
+                    <br>&emsp;&emsp;培養學生：自學、共學、思考、表達、傾聽、裁判 等六種帶得走的能力與習慣。讓學生：更加瞭解自己、願意和別人分享自己的心事、曉得 收送禮物時的注意事項、能專心聆聽 他人的報告、知道「愛」是什麼、知道 表達情意 的五種愛之語、知道如何擁有「愛」的能力、知道「愛自己」的重要性、明白「應對合宜」的重要性、瞭解 疫苗的原理、知道「失戀疫苗」是什麼、擁有 上台報告的勇氣。<br>
+                    <br>&emsp;&emsp;班際啦啦隊競賽 除了藉由 提供團隊合作的機會、讓學生有 歸屬感 之外，更希望每一位學生都能擁有：被 全班同學「唱名三次 大聲加油」的美好記憶，以此做為 日後若經歷挫折 得以 重新振作 的 支點。透過 分組競賽 的 運作，希望能為同學們 營造：課堂中 和睦歡樂的小組氛圍，更期待 由此萌發之 同儕情誼 在學生未來的人生道路上，能 成為彼此 傾訴的對象、能 提供彼此 支持的力量。<br>
+                    <br>&emsp;&emsp;希望藉由 接種「失戀疫苗」後 復原的記憶，能提升 學生們 情感上的 挫折耐受力，期許日後 若 學生真的失戀了，能幫助其 安然度過 失戀後的 情緒低潮期，而不會有 自殺或他殺等 憾事發生。</h5>
+                </div>
+                <div class="col-md-5 text-left text-success fw-900"  style="font-size: 25px;">
+                    <table style="margin-top: 50px; border: none;">
+                        <tr>
+                            <td><div><i class="fa-solid fa-child-reaching fa-8x wow animate__bounce" data-wow-duration="1s" data-wow-delay="0s" data-wow-iteration="infinite"></i></div></td>
+                            <td><div><i class="fa-solid fa-child-reaching fa-8x wow animate__bounce" data-wow-duration="1.5s" data-wow-delay="0.5s" data-wow-iteration="infinite"></i></div></td>
+                            <td><div><i class="fa-solid fa-child-reaching fa-8x wow animate__bounce" data-wow-duration="1s" data-wow-delay="0.5s" data-wow-iteration="infinite"></i></div></td>
+                            <td><div><i class="fa-solid fa-child-reaching fa-8x wow animate__bounce" data-wow-duration="1.5s" data-wow-delay="0s" data-wow-iteration="infinite"></i></div></td>
+                        </tr>
+                    </table>
+                    <p class="text-success my-4 text-center" style="font-size: 60px; padding-top: 50px;">加油：<span style="font-size: 40px;">班際 啦啦隊競賽</span>
+                    <p class="text-dark" style="font-size: 40px;">&emsp;&emsp;全班&emsp;為 告白同學 <br>&emsp;&emsp;唱名&emsp;加油打氣</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section 08 照片：放大圖、背景色漸層、動畫 -->
+    <section id="s08" class="container-fluid" style="height: 100vh; padding-top: 3%; background: linear-gradient(to bottom, #a3daa7, #FFFFA0)">
+        <div class="row fw-900 fs-1">    <!-- section 08 標題 的 第 1 行 字 -->
+            <div class="col-3"></div>
+            <div class="col-2 text-dark   text-end    wow animate__backInLeft"  data-wow-duration="8s" data-wow-delay="0s" data-wow-iteration="1" style="animation-fill-mode:forwards">第 一 代</div>
+            <div class="col-2 text-danger text-center wow animate__backInDown"  data-wow-duration="1s" data-wow-delay="0s" data-wow-iteration="1" style="animation-fill-mode:forwards">失戀疫苗</div>
+            <div class="col-2 text-dark   text-start  wow animate__backInRight" data-wow-duration="9s" data-wow-delay="0s" data-wow-iteration="1" style="animation-fill-mode:forwards">相片精選</div>
+            <div class="col-3"></div>
+        </div>       
+        <div class="row fs-3 text-dark" style="display: flex; flex-wrap: nowrap; margin-top: 20px;">   <!-- section 08 標題 的 第 2 行 字 -->
+            <div class="col-2"></div>
+            <div class="col-3 text-dark text-end">
+                <div class="text-danger wow animate__backInRight" data-wow-duration="1s" data-wow-delay="0s" data-wow-iteration="1" style="animation-fill-mode:forwards; display: inline-block;">點選</div>
+                <div class="wow animate__backInRight" data-wow-duration="1.5s" data-wow-delay="0s" data-wow-iteration="1" style="animation-fill-mode:forwards; display: inline-block;">任一張</div>
+                <div class="text-primary wow animate__backInRight" data-wow-duration="2s" data-wow-delay="0s" data-wow-iteration="1" style="animation-fill-mode:forwards; display: inline-block;">縮小圖</div>
+            </div>
+            <div class="col-2 text-danger text-center">
+                <div class="wow animate__backInRight" data-wow-duration="2.5s" data-wow-delay="0s" data-wow-iteration="1" style="animation-fill-mode:forwards">將</div>
+            </div>
+            <div class="col-3 text-dark text-start">
+                <div class="text-danger wow animate__backInRight" data-wow-duration="3s" data-wow-delay="0s" data-wow-iteration="1" style="animation-fill-mode:forwards; display: inline-block;">呈現</div>
+                <div class="wow animate__backInRight" data-wow-duration="3.5s" data-wow-delay="0s" data-wow-iteration="1" style="animation-fill-mode:forwards; display: inline-block;">清晰的</div>
+                <div class="text-primary wow animate__backInRight" data-wow-duration="4s" data-wow-delay="0s" data-wow-iteration="1" style="animation-fill-mode:forwards; display: inline-block;">放大圖</div>   
+            </div>
+        </div>
+        <div class="grid-container">
+            <div class="grid-item"><img src="img/s8-1-1.jpg" alt="Image 1" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-1-2.jpg" alt="Image 2" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-1-3.jpg" alt="Image 3" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-1-4.jpg" alt="Image 4" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-1-5.jpg" alt="Image 5" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-1-6.jpg" alt="Image 6" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-2-1.jpg" alt="Image 7" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-2-2.jpg" alt="Image 8" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-2-3.jpg" alt="Image 9" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-2-4.jpg" alt="Image 10" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-2-5.jpg" alt="Image 11" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-2-6.jpg" alt="Image 12" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-3-1.jpg" alt="Image 13" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-3-2.jpg" alt="Image 14" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-3-3.jpg" alt="Image 15" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-3-4.jpg" alt="Image 16" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-3-5.jpg" alt="Image 17" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-3-6.jpg" alt="Image 18" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-4-1.jpg" alt="Image 19" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-4-2.jpg" alt="Image 20" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-4-3.jpg" alt="Image 21" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-4-4.jpg" alt="Image 22" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-4-5.jpg" alt="Image 23" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-4-6.jpg" alt="Image 24" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-5-1.jpg" alt="Image 25" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-5-2.jpg" alt="Image 26" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-5-3.jpg" alt="Image 27" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-5-4.jpg" alt="Image 28" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-5-5.jpg" alt="Image 29" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-5-6.jpg" alt="Image 30" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-6-1.jpg" alt="Image 31" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-6-2.jpg" alt="Image 32" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-6-3.jpg" alt="Image 33" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-6-4.jpg" alt="Image 34" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+            <div class="grid-item"><img src="img/s8-6-6.jpg" alt="Image 36" onclick="enlargeImage(this)">
+                <div id="overlay" onclick="closeOverlay()"><img id="enlarged-image" src="" alt="Enlarged Image"></div>
+            </div>
+        </div>
+    </section>
+    <!-- section 09 短片：切版、超連結、背景色漸層 -->
+    <section id="s09" class="container-fluid" style="height: 100vh; padding-top: 5%; text-decoration: none; background: linear-gradient(to bottom, #FFFFA0, #034242)">
+        <div class="fs-1 fw-900 text-center text-primary mb-5 wow animate__animated animate__flip"  data-wow-duration="3s" data-wow-delay="0s" data-wow-iteration="1"
+             style="font-size: 10px;">失戀疫苗：教學短片、課堂記錄<br>
+            <!-- <p class="fs-4 fw-500 text-center text-gray mt-3">大尺吋螢幕 每行四列<span style="color: black">；</span>小尺吋螢幕 每行二列</p> -->
+        </div>
+        <div class="container" style="width: 80%; margin-top: 100px; margin-left: 20ps;">
+            <div class="row cols-3 cols-md-4 g-5" style="font-size: 30px;">
+                <div class="col">
+                    <a class="card" href="https://www.youtube.com/watch?v=cIQbGZ3HZWs" target="_blank">
+                        <img src="img/s9-1.png" alt="Clickable Image">
+                        <div class="card-body">
+                            <p class="card-text" style="color: red;text-decoration: none!important;">失戀疫苗
+                                <span style="color: blue;text-decoration: none!important;"> 教學短片</span><br>
+                                <span style="color: black;text-decoration: none!important;">惠來國小</span>
+                                <span style="color: green;text-decoration: none!important;">很愛演劇團</span>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col">
+                    <a class="card" href="https://www.youtube.com/watch?v=v1WKNnP3BoA&t=23s" target="_blank">
+                        <img src="img/s9-2.png" alt="Clickable Image">
+                        <div class="card-body">
+                            <p class="card-text" style="color: red;">失戀疫苗
+                                <span style="color: blue;"> 教學短片</span><br>
+                                <span style="color: black;">惠來國小</span>
+                                <span style="color: green;">很愛演劇團</span>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+                <!-- <div class="col">
+                    <a class="card" href="https://www.youtube.com/watch?v=GauOG4aHSwQ" target="_blank">
+                        <img src="img/s9-3.png" alt="Clickable Image">
+                        <div class="card-body">
+                            <p class="card-text" style="color: red;">Gary Chapman<br>
+                                <span style="color: blue;">5 種愛之語</span>
+                            </p>
+                        </div>
+                    </a>
+                </div> -->
+                <!-- <div class="col mb-3">
+                    <a class="card" href="https://www.youtube.com/watch?v=nwAYpLVyeFU" target="_blank">
+                        <img src="img/s9-4.png" alt="Clickable Image">
+                        <div class="card-body">
+                            <p class="card-text" style="color: red;">Kindness Boomerang<br>
+                                <span style="color: black;">" </span>
+                                <span style="color: blue;"> One Day </span>
+                                <span style="color: black;"> "</span>
+                            </p>
+                        </div>
+                    </a>
+                </div> -->
+                <!-- <div class="col" style="padding-bottom: 50px;">
+                    <a class="card" href="https://www.youtube.com/watch?v=5dUtAPT2Tus&t=23s" target="_blank">
+                        <img src="img/s9-5.png" alt="Clickable Image">
+                        <div class="card-body">
+                            <p class="card-text" style="color: black;">2018
+                                <span style="color: blue;"> 教練研習 </span><br>
+                                <span style="color: green;">採 學思達 教學法</span>
+                            </p>
+                        </div>
+                    </a>
+                </div> -->
+                <div class="col">
+                    <a class="card" href="https://www.youtube.com/watch?v=2l265wPsMvA&t=113s" target="_blank">
+                        <img src="img/s9-6.png" alt="Clickable Image">
+                        <div class="card-body">
+                            <p class="card-text" style="color: black;">2018
+                                <span style="color: blue;">告白練習</span>
+                                <span style="color: green;">活動記錄</span>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+                <!-- <div class="col">
+                    <a class="card" href="G4-604.MP4" target="_blank">
+                        <img src="img/s9-7.png" alt="Clickable Image">
+                        <div class="card-body">
+                            <p class="card-text" style="color: black;">第10屆
+                                <span style="color: red;">《合宜的告白》</span><br>
+                                <span style="color: blue;"> 短劇競演</span><br>
+                                <span style="color: blue;">Q : 你是裁判 會給幾分?</span>
+                            </p>
+                        </div>
+                    </a>
+                </div> -->
+                <!-- <div class="col">
+                    <a class="card" href="G5-605.mp4" target="_blank">
+                        <img src="img/s9-8.png" alt="Clickable Image">
+                        <div class="card-body">
+                            <p class="card-text" style="color: black;">第11屆
+                                <span style="color: red;">《合宜的告白》</span><br>
+                                <span style="color: blue;"> 短劇競演</span><br>
+                                <span style="color: blue;">最佳劇本獎 </span>
+                                <span style="color: green;"> 605 丙組</span>
+                            </p>
+                        </div>
+                    </a>
+                </div> -->
+            </div>
+        </div>  
+    </section>
+    <!-- section 10 成員：切版 + 動畫-->
+    <section id="s10" class="container-fluid" style="height: 100vh; padding-top: 3%; background: linear-gradient(to bottom, #034242, #034242)">
+        <div style="font-size: 60px; font-weight: 900; text-align: center; color: #aedbaf;">
+            <p style="margin-bottom: 100px;">我們的團隊 About us</p>
+        </div>
+        <div class="row" style="row-gap: 80px; text-align: center;">  <!-- 前五位 : 課程設計 與 告白教練，後五位 : 網站規劃 與 程式設計 -->
+            <div class="col-md-1"></div>
+            <div class="col-sm-6 col-md-2 wow animate__backInRight" data-wow-duration="1s" data-wow-delay="0s" data-wow-iteration="1" style="animation-fill-mode:forwards">
+                <div class="circle-box"><img src="img/Staff-c-0.jpg"></div>
+                <h4 style="color: #e5dfdf;">課程&emsp;設計發展</h4>
+            </div>
+            <div class="col-sm-6 col-md-2 wow animate__backInRight" data-wow-duration="2s" data-wow-delay="0s" data-wow-iteration="1" style="animation-fill-mode:forwards">
+                <div class="circle-box"><img src="img/Staff-c-1.jpg"></div>
+                <h4 style="color: #e5dfdf;">教練團&emsp;團長</h4>
+            </div>
+            <div class="col-sm-6 col-md-2 wow animate__backInRight" data-wow-duration="3s" data-wow-delay="0s" data-wow-iteration="1">
+                <div class="circle-box"><img src="img/Staff-c-3.jpg"></div>
+                <h4 style="color: #e5dfdf;">告白活動&emsp;執行</h4>
+            </div>
+            <div class="col-sm-6 col-md-2 wow animate__backInRight" data-wow-duration="4s" data-wow-delay="0s" data-wow-iteration="1" style="animation-fill-mode:forwards">
+                <div class="circle-box"><img src="img/Staff-c-2.jpg"></div>
+                <h4 style="color: #e5dfdf;">告白活動&emsp;主持</h4>
+            </div>
+            <div class="col-sm-6 col-md-2 wow animate__backInRight" data-wow-duration="5s" data-wow-delay="0s" data-wow-iteration="1">
+                <div class="circle-box"><img src="img/Staff-c-4.jpg"></div>
+                <h4 style="color: #e5dfdf;">課程側記&emsp;主筆</h4>
+            </div>
+            <div class="col-sm-6 col-md-2 wow animate__backInRight" data-wow-duration="6s" data-wow-delay="0s" data-wow-iteration="1">
+                <div class="circle-box"><img src="img/Staff-e-1.jpg"></div>
+                <h4 style="color: #e8e3a7;">網站&emsp;設計規劃</h4>
+            </div>
+            <div class="col-sm-6 col-md-2 wow animate__backInRight" data-wow-duration="7s" data-wow-delay="0s" data-wow-iteration="1">
+                <div class="circle-box"><img src="img/Staff-e-2.jpg"></div>
+                <h4 style="color: #e8e3a7;">後端&emsp;技術指導</h4>
+            </div>
+            <div class="col-sm-6 col-md-2 wow animate__backInRight" data-wow-duration="8s" data-wow-delay="0s" data-wow-iteration="1">
+                <div class="circle-box"><img src="img/Staff-e-4.jpg"></div>
+                <h4 style="color: #e8e3a7;">後端&emsp;程式設計</h4>
+            </div>
+            <div class="col-sm-6 col-md-2 wow animate__backInRight" data-wow-duration="9s" data-wow-delay="0s" data-wow-iteration="1">
+                <div class="circle-box"><img src="img/Staff-e-3.jpg"></div>
+                <h4 style="color: #e8e3a7;">前端&emsp;技術指導</h4>
+            </div>
+            <div class="col-sm-6 col-md-2 wow animate__backInRight" data-wow-duration="10s" data-wow-delay="0s" data-wow-iteration="1">
+                <div class="circle-box"><img src="img/Staff-e-0.jpg"></div>
+                <h4 style="color: #e8e3a7; margin-bottom: 50px;">前端&emsp;程式設計</h4>
+            </div>
+        </div>
+    </section>
+    <!-- section 11 報導：文繞圖、外框排版 -->
+    <section id="s11" class="container-fluid" style="height: 100vh; background: linear-gradient(to bottom, #034242, #030342)">
+        <div class="container-fluid" style="width: 96%; height: 100vh; position: relative;">
+            <div style="background-color: #adadad; width: 10%; height: 20%; position: absolute; top: 0; left: 0;"></div>
+            <div style="background-color: #e54a4a; width: 10%; height: 20%; position: absolute; top: 0; left: 10%;"></div>
+            <div style="background-color: #ec8a22; width: 10%; height: 20%; position: absolute; top: 0; left: 20%;"></div>
+            <div style="background-color: #efe149; width: 10%; height: 20%; position: absolute; top: 0; left: 30%;"></div>
+            <div style="background-color: #92db84; width: 10%; height: 20%; position: absolute; top: 0; left: 40%;"></div>
+            <div style="background-color: #7ee3e8; width: 10%; height: 20%; position: absolute; top: 0; left: 50%;"></div>
+            <div style="background-color: #15a6ba; width: 10%; height: 20%; position: absolute; top: 0; left: 60%;"></div>
+            <div style="background-color: #25637d; width: 10%; height: 20%; position: absolute; top: 0; left: 70%;"></div>
+            <div style="background-color: #030650; width: 10%; height: 20%; position: absolute; top: 0; left: 80%;"></div>
+            <div style="background-color: #3f036d; width: 10%; height: 20%; position: absolute; top: 0; right: 0;"></div>
+            <div style="background-color: #7c4aa3; width: 10%; height: 20%; position: absolute; top: 20%; right: 0;"></div>
+            <div style="background-color: #bb2d90; width: 10%; height: 20%; position: absolute; top: 40%; right: 0;"></div>
+            <div style="background-color: #ed4769; width: 10%; height: 20%; position: absolute; top: 60%; right: 0;"></div>
+            <div style="background-color: #ff5f5f; width: 10%; height: 20%; position: absolute; top: 80%; right: 0;"></div>
+            <div style="background-color: #ffb2b2; width: 10%; height: 20%; position: absolute; bottom: 0; right: 0;"></div>
+            <div style="background-color: #ffd1b2; width: 10%; height: 20%; position: absolute; bottom: 0; right: 10%;"></div>
+            <div style="background-color: #fbffb2; width: 10%; height: 20%; position: absolute; bottom: 0; right: 20%;"></div>
+            <div style="background-color: #c8ffb2; width: 10%; height: 20%; position: absolute; bottom: 0; right: 30%;"></div>
+            <div style="background-color: #7cfd48; width: 10%; height: 20%; position: absolute; bottom: 0; right: 40%;"></div>
+            <div style="background-color: #48fdcd; width: 10%; height: 20%; position: absolute; bottom: 0; right: 50%;"></div>
+            <div style="background-color: #b7e6ff; width: 10%; height: 20%; position: absolute; bottom: 0; right: 60%;"></div>
+            <div style="background-color: #b5acfc; width: 10%; height: 20%; position: absolute; bottom: 0; right: 70%;"></div>
+            <div style="background-color: #efacfc; width: 10%; height: 20%; position: absolute; bottom: 0; right: 80%"></div>
+            <div style="background-color: #fcacc3; width: 10%; height: 20%; position: absolute; bottom: 0; left: 0"></div>
+            <div style="background-color: #bf5a5a; width: 10%; height: 20%; position: absolute; bottom: 20%; left: 0"></div>
+            <div style="background-color: #600505; width: 10%; height: 20%; position: absolute; bottom: 40%; left: 0"></div>
+            <div style="background-color: #1f0303; width: 10%; height: 20%; position: absolute; bottom: 60%; left: 0"></div>
+            <div style="background-color: #585858; width: 10%; height: 20%; position: absolute; bottom: 80%; left: 0"></div>
+
+            <div class="container-fluid" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0 ; width:92%; height:86%; transform: translate(0, 8%); background-color: #48fdcd;">
+                <div class="row" style="width: 100%;">
+                    <p class="h1 fw-900 text-center" style="margin-top: 50px;">接種「失戀疫苗」</p>
+                    <h2 class="text-center">惠來國小 超前部署 情感教育</h2>
+                    <div class="text-end" style="font-size: 15px; margin-bottom: 30px;">國立教育廣播電台 2020-06-20 發佈 曾筱婷 臺中</div>      
+                    <div class="container col-md-4 col-12" style="font-size: 18px; padding-left: 35px; text-align: justify;">
+                        <img src="img/report-1.jpg" width="200px" class="float-start wow animate__slideInDown"
+                            data-wow-duration="2s" data-wow-delay="0s" data-wow-iteration="1"
+                            style="margin-right: 15px;">
+                        <div>&emsp;&emsp;臺中市 惠來國小 規劃 情感教育課程「失戀疫苗」，是由 教育志工 鄭婉儀 編撰課程教材，帶領 校內多名志工 利用 綜合活動課程，每週為六年級學生傳授「感情武功秘笈」。上完一學期課後，校方更舉辦「拒絕大會」，讓學生實際體驗：表白後遭受拒絕與拒絕對方的情境，學習面對感情挫折，並且自我調適。</div>
+                        <br>
+                        <div>&emsp;&emsp;臺中市教育局 近來致力推動「情感教育」，惠來國小教育志工 鄭婉儀的碩士論文 與此相關，曾為六年級女兒所屬的班級 開設課程，透過「學思達」教學，帶領「前青春期」學生們 提早正視自我感受，並採取 適當的對應方式。</div>
+                    </div>        
+                    <div class="container col-md-4 col-12" style="font-size: 17px; padding-left: 10px; text-align: justify;">
+                        <div>&emsp;&emsp;近三年「失戀疫苗」擴大辦理，不僅 全年級學生 均可受惠，陣容上也新增多名志工 協助教學。課程告一段落後，學期末，校方舉辦「拒絕大會」，為學生 兩兩配對，讓他們以「拒絕」為前提，親自向對方表白，演練如何承受或表示拒絕，學習拿捏措辭和行為，尊重對方 也 調適自己，平靜坦然地面對 感情挫折。</div>
+                        <img src="img/report-2.jpg" width="200px" class="float-end wow animate__heartBeat"
+                            data-wow-duration="2s" data-wow-delay="0.5s" data-wow-iteration="1"
+                            style="margin-left: 10px; margin-top: 10px;">
+                        <div>&emsp;&emsp;惠來國小 輔導組長林淑儀說明：每組「失敗表白」都有4個人參與：表白者與被表白者，以及2名在旁輔導的「告白教練」志工。為了提高參與度，志工自掏腰包購買：教養書籍、常用文具、有機食品......等獎品，並設立各式獎項，例如：友愛同學勇氣獎，班際啦啦隊競賽績優獎、學習單績優獎、最佳劇本獎、……等，透過獎勵吸引學生投入其中。</div>
+                    </div>        
+                    <div class="container col-md-4 col-12 text-center" style="font-size: 18px; padding-left: 10px; ">
+                        <img src="img/report-3.jpg" width="200px" class="float-start wow animate__fadeInTopRight"
+                        data-wow-duration="2s" data-wow-delay="2s" data-wow-iteration="1"
+                        style="margin-right: 10px;">
+                        <div style="text-align: justify;">&emsp;&emsp;林淑儀表示，活動中 所有表白 都以 拒絕收場，因此沒有成功與失敗的差別，學生反而更能大方表白，並勇敢接受 期待落空。鑑於近年來 因感情處理不當 導致的社會案件頻傳，惠來國小 期待藉由接種「失戀疫苗」，可以為學生 超前部署，讓他們產生 情感上的免疫力，不致成為「感情草莓族」。</div>
+                        <div style="font-size: 15px; text-align: left; margin-top: 80px;">
+                                &emsp;&emsp;&emsp;【 插圖說明 】<br>
+                                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;上圖：志工 鄭婉儀 開設「失戀疫苗」課程。<br>
+                                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;中圖：學生藉「學思達」方式小組討論。<br>
+                                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;下圖：雙方在「拒絕大會」上 握手言和。
+                        </div>
+                    </div>
+                </div>   
+            </div>  
+        </div>  
+    </section>
+    <!-- section 12 觀課 -->
+    <section id="s12" class="container-fluid" style="height: 100vh; background: linear-gradient(to bottom, #030342, #363678)">
+        <div class="h1 fw-900 text-center pt-5 mb-3" style="color: #7ee4e4;">歡 迎 蒞 臨&emsp;<span style="color: #e47edf;">&emsp;入 班 觀 課</div>
+        <div class="fs-1 fw-600 text-center text-light pt-3 pb-3">觀 課 地 點&emsp;<span style="color: #7ee4e4;"> 台 中 市&emsp;西 屯 區 </span>&emsp;惠 來 國 民 小 學</div>
+        <div class="row" style="margin-top: 30px;">
+            <div class="col-md-7" style="margin-bottom: 30px;"><img src="img/HLES.jpg" alt=""></div>
+            <div class="col-md-5"><img src="img/HLES-door.jpg" alt=""></div>
+        </div>
+        <h2 class="text-center text-warning wow animate__heartBeat" data-wow-duration="3s" data-wow-delay="0s" data-wow-iteration="infinite">
+            如欲報名&emsp;入班觀課&emsp;請先註冊&emsp;成為會員</h2>
+    </section>
+    <!-- section 13 嵌入地圖 -->
+    <section id="s13" class="container-fluid" style="height: 100vh; padding-top: 5%; background: linear-gradient(to bottom, #363678, #7474ca)">
+        <div class="row d-flex justify-content-center">
+            <div class="col-10">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8002.0979486150545!2d120.64653002473062!3d24.164985437065507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693d895260f26b%3A0x3b49772ab4ca9404!2z6Ie65Lit5biC6KW_5bGv5Y2A5oOg5L6G5ZyL5rCR5bCP5a24!5e0!3m2!1szh-TW!2stw!4v1706948472100!5m2!1szh-TW!2stw"
+                    style="width: 100%; height: 80vh; border:0; margin-bottom: 20px;" allowfullscreen=""
+                    loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+    <!-- section 14 加入：動畫、遮色片 -->
+    <section id="s14" class="container-fluid" style="height: 100vh; background: linear-gradient(to bottom, #7474ca, #babae8)">
+        <div class="row" style="width: 95%;">
+            <div class="col-md-3 d-flex">
+                <div class="container-fluid bg-cover"
+                    style="background-image: url(img/joinUs.jpg); background-size: contain; background-position-y: top;">
+                </div>
+            </div>
+            <div class="col-md-9 py-5 bg-cover" style="background-image: url(img/joinUs-2.png); ">
+                <div class="row">
+                    <br><br>
+                    <div class="col-md-8 p-3 ms-5 rounded-4" style="background-color: rgba(0, 0, 0, 0.4);">
+                        <small class="text-bg-warning fw-300 badge mb-2 wow animate__heartBeat" data-wow-duration="2s"
+                            data-wow-delay="0s" data-wow-iteration="infinite">
+                            <h1>加入我們</h1>
+                        </small>
+                        <h2 class="fw-900 text-white">招募 - 入班教練 數名</h2>
+                        <p class="fw-300 text-white">
+                            我們正在尋找充滿熱情、富有經驗的入班教練，加入我們的團隊。我們期望入班教練能夠擁有以下特質：對於教育和培訓充滿熱情，能夠激發學員的學習興趣。能夠個別關心每位學員，協助他們發揮潛力，同時注重整體團隊的合作和發展。具備良好的溝通和人際技巧，能夠與學員、家長和團隊成員建立積極的關係。若您認為自己符合以上條件，我們誠摯邀請您的加入。請填寫我們的線上申請表格，我們期待與您進一步的面談。
+                        </p>
+                        <a href="#" class="btn btn-outline-danger">詳細資料</a>
+                    </div>
+                </div>
+                <br><br><br>
+                <div class="row">
+                    <div class="col-md-8 p-3 ms-5 rounded-4" style="background-color: rgba(0, 0, 0, 0.4);">
+                        <small class="text-bg-success fw-300 badge mb-2 wow animate__heartBeat" data-wow-duration="2s"
+                            data-wow-delay="1s" data-wow-iteration="infinite" text-center>
+                            <h1>加入我們</h1>
+                        </small>
+                        <h2 class="fw-900 text-white">招募 - 告白教練 數名</h2>
+                        <p class="fw-300 text-white">
+                            我們正在尋找具有豐富經驗和熱情的教練，協助學生們完成告白練習。我們期望您擁有以下特質：積極主動、充滿活力，並且能夠成為學員們的榜樣。關心每一位學員的成長，能夠提供正面的支持和指導。有著優秀的領導和團隊合作能力，能夠與其他教練和團隊成員協同努力。如果您對於這個機會感興趣，請填寫我們的線上申請表格，期待能夠與您進一步交流。
+                        </p>
+                        <a href="#" class="btn btn-outline-success">詳細資料</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section 15 本站 : Figma -->
+    <section id="s15" class="container-fluid" style="width: 100%; background: linear-gradient(to bottom, #babae8, #ffffff)">
+        <div class="pt-5"><img style="width:85%;" src="img/vllv-sitemap-project-s15.png"></div>
+    </section>
+    <!-- section 16 購物連結、版權宣告 : 連結外網、跑馬燈 -->
+    <section id="s16" class="container-fluid mt-5" style="background: linear-gradient(to bottom, #ffffff, #ffffff)">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="container col-1"></div>
+                <div class="container col-1"><a class="outsideLink" href="https://www.momoshop.com.tw/main/Main.jsp"><img src="img/momo.png"></a></div>
+                <div class="container col-1"><a class="outsideLink" href="https://shopee.tw/"><img src="img/shopee.png"></a></div>
+                <div class="container col-1">
+                    <a class="nav-link active" href="https://www.facebook.com/"><i class="fa-brands fa-square-facebook text-primary" style="font-size:85px"></i></a>
+                </div>
+                <div class="container col-1">
+                    <a class="nav-link active" href="https://line.me/tw/"><i class="fa-brands fa-line text-success" style="font-size:85px"></i></a>
+                </div>
+                <div class="container col-7">
+            </div>
+        </div>
+        <div class="page_footer container-fluid fs-3">
+            <marquee direction="left" scrollamount="20" behavior="left">
+                <p1>提升 青少年<span style="color: blue;"> 挫折耐受力 </span><span style="color: green;"> 談情說愛 </span><span
+                        style="color: red;"> 接種一劑 失戀疫苗 </span>
+                    <span style="color: rgb(179, 0, 255);">&emsp;&emsp;&emsp;Sincs 2012</span>
+                </p1><br>
+                <p2>Improve the <span style="color: blue;"> Frustration tolerance </span> of Youth by <span
+                        style="color: green;"> Discussing the Theme of Love </span> & <span style="color: red;">
+                        Vaccinate a Lovelorn Vaccine</span></p2>
+            </marquee>
+            <h6 class="fw-300" style="text-align: right; padding-top: 30px; margin-bottom: 200px;color: #0310ff;">雲端應用技術實務班 
+                <span style=" color: black;">第 2 期</span><span style=" color: red;"> 失戀疫苗 </span> 專題組&emsp;</p>
+            </h6>
+        </div>
+    </section>
+    <!--  以下為 java script  -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="https://unpkg.com/counterup2@2.0.2/dist/index.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script>new WOW().init();</script>
+    <script>
+
+        // 以下為 section 04 人數：counter
+        const counterUp = window.counterUp.default
+
+        const callback = entries => {
+            entries.forEach(entry => {
+                const el = entry.target
+                if (entry.isIntersecting && !el.classList.contains('is-visible')) {
+                    counterUp(el, {
+                        duration: 2000,
+                        delay: 16,
+                    })
+                    el.classList.add('is-visible')
+                }
+            })
+        }
+        const IO = new IntersectionObserver(callback, { threshold: 1 })
+        const el01 = document.querySelector('.counter01')
+        IO.observe(el01)
+        const el02 = document.querySelector('.counter02')
+        IO.observe(el02)
+        const el03 = document.querySelector('.counter03')
+        IO.observe(el03)
+        const el04 = document.querySelector('.counter04')
+        IO.observe(el04)
+
+        // 以下為 section 08 照片：排版
+        function enlargeImage(img) {
+            var enlargedImage = document.getElementById('enlarged-image');
+            enlargedImage.src = img.src;
+            document.getElementById('overlay').style.display = 'flex';
+        }
+        function closeOverlay() {
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        // ***********************************************************
+        // 以下為  section 0-3 註冊 register 監聽 + 檢查 欄位輸入內容
+        var flag_username = false;
+        var flag_password = false;
+        var flag_re_password = false;
+        var flag_email = false;
+        var flag_chk01 = false;
+
+        $(function () {
+            //判斷是否登入，即有沒有 UID
+            if (getCookie("UID01") != "") {
+                //UID01存在, 傳遞至後端api 判斷是否合法
+                var dataJSON = {};
+                dataJSON["UID01"] = getCookie("UID01");
+                console.log(JSON.stringify(dataJSON));
+                $.ajax({
+                    type: "POST",
+                    url: "http://192.168.10.68/project-VLLV/member-Check_UID-api.php",
+                    data: JSON.stringify(dataJSON),
+                    dataType: "json",
+                    success: showdata_Check_UID,
+                    error: function () {
+                        alert("error：http://192.168.10.68/project-VLLV/member-Check_UID-api.php");
+                    }
+                });
+            }
+
+            // [登出] 按鈕 監聽 #s02_logout_btn : 若 登出 則回到 首頁。
+            $("#s02_logout_btn").click(function(){
+                // 呼叫 setCookie 函式，將存放於本機 名為 UID01 的 cookie 清空(並沒存放於資料庫)，過期時間為7天。這樣可以將用戶的登入資訊清除。
+                setCookie("UID01", "", 7);
+                location.href = "SPA-for-all.html";
+            });
+
+            // 即時監聽 #username
+            $("#username").bind("input propertychange", function () {
+                if ($(this).val().length > 3 && $(this).val().length < 13) {
+                    //符合規定, 傳遞至後端檢查帳號是否存在
+                    var dataJSON = {};
+                    dataJSON["Username"] = $("#username").val();
+                    console.log(JSON.stringify(dataJSON));
+
+                    $.ajax({
+                        type: "POST",
+                        url: "http://192.168.10.68/project-VLLV/member-check-uni-api.php",
+                        data: JSON.stringify(dataJSON),
+                        dataType: "json",
+                        success: showdata_check_uni,
+                        error: function () {
+                            alert("error : http://192.168.10.68/project-VLLV/member-check-uni-api.php");
+                        }
+                    });
+                } else {
+                    //不符合規定
+                    $(this).removeClass('is-valid');
+                    $(this).addClass('is-invalid');
+                    flag_username = false;
+                }
+            });
+
+            // 即時監聽 #password
+            $("#password").bind("input propertychange", function () {
+                console.log($(this).val().length);  // is-invalid
+                if ($(this).val().length > 4 && $(this).val().length < 11) {
+                    // 符合規定
+                    $(this).removeClass('is-invalid');
+                    $(this).addClass('is-valid');
+                    flag_password = true;
+                } else {
+                    // 不符合規定
+                    $(this).removeClass('is-valid');
+                    $(this).addClass('is-invalid');
+                    flag_password = false;
+                }
+            });
+
+            // 即時監聽 #re_password
+            $("#re_password").bind("input propertychange", function () {
+                console.log($(this).val().length);  // is-invalid
+                if ($(this).val() == $("#password").val()) {
+                    // 符合規定
+                    $(this).removeClass('is-invalid');
+                    $(this).addClass('is-valid');
+                    flag_re_password = true;
+                } else {
+                    // 不符合規定
+                    $(this).removeClass('is-valid');
+                    $(this).addClass('is-invalid');
+                    flag_re_password = false;
+                }
+            });
+
+            // 即時監聽 #email
+            $("#email").bind("input propertychange", function () {
+                if ($(this).val().length > 0 && $(this).val().length < 11) {
+                    // 符合規定
+                    $(this).removeClass('is-invalid');
+                    $(this).addClass('is-valid');
+                    flag_email = true;
+                } else {
+                    // 不符合規定
+                    $(this).removeClass('is-valid');
+                    $(this).addClass('is-invalid');
+                    flag_email = false;
+                }
+            });
+
+            // 監聽 checkbox #chk01
+            $("#chk01").change(function () {
+                if ($(this).is(":checked")) {
+                    // 同意 有打勾
+                    flag_chk01 = true;
+                } else {
+                    // 同意 沒打勾
+                    flag_chk01 = false;
+                }
+            });
+
+            // 註冊按鈕監聽 #reg_btn
+            $("#reg_btn").click(function () {
+                // 如果 所有的 flag 都是 true ( 不寫 就是 true )
+                if (flag_username && flag_password && flag_re_password && flag_email && flag_chk01) {
+                    // {"Username":"XX", "Password":"XXX", "Email":"XXXXX"}
+
+                    console.log("註冊:");
+                    var dataJSON = {};
+                    dataJSON["Username"] = $("#username").val();
+                    dataJSON["Password"] = $("#password").val();
+                    dataJSON["Email"] = $("#email").val();
+                    // BloodType, ChineseZodiac, Constrllation, UID01
+                    dataJSON["BloodType"] = $("#BloodType").val();
+                    dataJSON["ChineseZodiac"] = $("#ChineseZodiac").val();
+                    dataJSON["Constrllation"] = $("#Constrllation").val();
+                    dataJSON["UID01"] ="111";
+                    console.log(JSON.stringify(dataJSON));
+
+                    // 傳遞至後端 執行註冊行為
+                    $.ajax({
+                        type: "POST",
+                        url: "http://192.168.10.68/project-VLLV/member-Create-api.php",
+                        data: JSON.stringify(dataJSON),
+                        dataType: "json",
+                        success: showdata,
+                        error: function () {
+                            alert("error : http://192.168.10.68/project-VLLV/member-Create-api.php");
+                        }
+                    });
+
+                } else {
+                    alert("欄位有錯請修正 ! ( 可能是 帳號已存在 )");
+                }
+            });
+
+            //登入按鈕監聽 #login_btn
+            $("#login_btn").click(function () {
+                // console.log($("#login_username").val()+$("#login_password").val());
+                //{"Username":"XX", "Password":"XXX"}
+                var dataJSON = {};
+                dataJSON["Username"] = $("#login_username").val();
+                dataJSON["Password"] = $("#login_password").val();
+                console.log(JSON.stringify(dataJSON));
+
+                //傳遞至後端執行登入行為
+                $.ajax({
+                    type: "POST",
+                    url: "http://192.168.10.68/project-VLLV/member-login-api.php",
+                    data: JSON.stringify(dataJSON),
+                    dataType: "json",
+                    success: showdata_login,
+                    error: function () {
+                        alert("error : http://192.168.10.68/project-VLLV/member-login-api.php");
+                    }
+                });
+            });
+
+            // 20240313
+            $("#BloodType").bind("input propertychange", function(){
+                console.log($(this).val());
+            });
+        });
+
+        function showdata(data) {
+            console.log(data);
+            if (data.state) {
+                alert(data.message);
+                location.href = "SPA-for-all.html"
+            } else {
+                alert(data.message);
+            }
+        }
+
+        function showdata_check_uni(data) {
+            console.log(data);
+            if (data.state) {
+                //帳號不存在, 可以使用!
+                $("#username").removeClass('is-invalid');
+                $("#username").addClass('is-vaild');
+                flag_username = true;
+            } else {
+                //帳號存在, 不可以使用!
+                $("#username").removeClass('is-valid');
+                $("#username").addClass('is-invaild');
+                flag_username = false;
+            }
+        }
+
+        function showdata_login(data) {
+            console.log(data);
+            if (data.state) {
+                alert(data.message);
+                var uid01 = data.data[0].UID01;
+                setCookie("UID01", uid01, 7); // 登入後 保留7日
+                $("#loginModal").modal("hide");
+                $("#user_message").text(data.data[0].Username + " 登入中 ");
+
+                // 隱藏 [登入] [註冊] 按鈕
+                $("#s02_login_btn").addClass("d-none");
+                $("#s02_reg_btn").addClass("d-none");
+
+                // 顯示 會員功能
+                $("#s02_member_btn01").removeClass("disabled");
+                $("#s02_member_btn02").removeClass("disabled");
+                $("#s02_member_btn03").removeClass("disabled");
+                $("#s02_member_btn04").removeClass("disabled");
+
+                // 顯示 [登出] 按鈕
+                $("#s02_logout_btn").removeClass("d-none");
+                $("#s02_member_only").removeClass("d-none");
+            } else {
+                alert(data.message);
+            }
+        }
+
+        function showdata_Check_UID(data) {
+            console.log(data);
+            if (data.state) {
+                //驗證成功
+                $("#user_message").text(data.data[0].Username + " 登入中 ");
+                $("#s02_login_btn").addClass("d-none");
+                $("#s02_reg_btn").addClass("d-none");
+
+                //顯示高級功能
+                $("#s02_member_btn01").removeClass("disabled");
+                $("#s02_member_btn02").removeClass("disabled");
+                $("#s02_member_btn03").removeClass("disabled");
+                $("#s02_member_btn04").removeClass("disabled");
+
+                //顯示 [登出] 按鈕
+                $("#s02_logout_btn").removeClass("d-none");
+                $("#s02_member_only").removeClass("d-none");
+            }
+        }
+
+        // copy from w3s JS Cookies : A Function to Set a Cookie 
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            let expires = "expires="+ d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            }
+
+         // copy from w3s JS Cookies : A Function to Get a Cookie   
+         function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i <ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+            }        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+[
+    {  
+      "title": "註冊會員",
+      "content": "及 以下會員 均可瀏覽 歷屆 學習單。",
+      "show": true
+    },
+    {
+      "title": "觀課會員",
+      "content": "及 以下會員 均可瀏覽 上課 投影片。",
+      "show": true
+    },
+    {
+      "title": "新晉教練",
+      "content": "及 以下會員 均可瀏覽 當屆  課程、活動 規劃。",
+      "show": true
+    },
+    {  
+      "title": "資深教練",
+      "content": "及 以下會員 均可下載 歷屆 學習單。",
+      "show": true
+    },
+    {
+      "title": "活動主持",
+      "content": "及 以下會員 均可下載 當屆 課程活動 規劃。",
+      "show": true
+    },
+    {
+        "title": "課程主持",
+        "content": "及 以下會員 均可下載 當屆 上課 投影片。",
+        "show": true
+    },    
+    {
+      "title": "網頁經理",
+      "content": "即 前端工程師，維護 網頁版面。",
+      "show": true
+    },
+    {
+        "title": "功能經理",
+        "content": "即 後端工程師，維護 網站功能。",
+        "show": true
+    },
+    {
+      "title": "全站經理",
+      "content": "即 網站所有人，維護 網站資料庫 內容。",
+      "show": true
+    }
+  ]
+  

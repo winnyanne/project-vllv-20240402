@@ -1,0 +1,82 @@
+:root {
+    --pagination_gap: 30px; //button 與 ul 的間距
+    --pagiItem_color: black;
+    --pagiItem_bg: white;
+    --pagiItem_now_color: white;
+    --pagiItem_now_bg: #1976d2;
+    --pagiItem_size: 2rem;
+    --pagiItem_font: 1.5rem;
+    --pageItems_gap: 10px; //li彼此的間距
+}
+.disabled{
+    pointer-events: none;
+    opacity: .6;
+}
+
+.my-pagination {
+    display: flex;
+    column-gap: var(--pagination_gap);
+
+    .preBtn,.pageList *,.nextBtn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: var(--pagiItem_size);
+        height: var(--pagiItem_size);
+        font-size: var(--pagiItem_font) !important;
+        font-weight:normal;
+        text-align: center;
+        border: none;
+        border-radius: 0.375rem;
+        background-color: var(--pagiItem_bg);
+        color: var(--pagiItem_color);
+        cursor: pointer;
+        user-select: none;
+        &:hover {
+            filter: brightness(0.95);
+        }
+    }
+    
+    .preBtn::before{
+        content:attr(data-preicon);
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+      //<!-- use fontawesome6 -->
+    }
+    .nextBtn::after{
+        content:attr(data-nexticon);
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+      //<!-- use fontawesome6 -->
+    }
+
+    ul {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        column-gap: var(--pageItems_gap);
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        .nowpage {
+            --nowpage: 1;
+            position: absolute;
+            z-index: 1;
+            translate: (calc(calc(var(--pagiItem_size) + var(--pageItems_gap)) * calc(var(--nowpage) - 1)));
+            background-color: var(--pagiItem_now_bg);
+            color: var(--pagiItem_now_color);
+            cursor: default;
+            transition: translate 0.25s ease 0s;
+
+            &::before {
+                content: attr(data-nowpage);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}

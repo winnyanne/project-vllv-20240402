@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/themes/odometer-theme-minimal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.css">
+    <title>1-courseIntro 課程介紹</title>
+    <style>
+        .banner { /*  首頁 主選單下的 表頭插圖 設定   */
+        background: url("../img/Header-2.jpg") center;
+        -webkit-clip-path: url(#bannerClip);
+                clip-path: url(#bannerClip);
+        height: 42vw;
+        animation: fade-in 5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.05s 1 normal forwards;
+        }
+
+        /*  粉紅圓球 位置設定  */
+        .position-center-bottom {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+        }
+
+        /*  將 主選單 固定 在 右側  */
+        .menu-container { /* 整個選單容器 */
+            position: fixed;                            /* 固定位置 */
+            top: 30%;                                   /* 上方距離為 30% */
+            right: 0;                                   /* 靠右 */
+            width: 100px;                            
+            background-color: rgba(255, 255, 255, 0.5);     /* 透明背景 */
+            border-radius: 20px;
+            margin-right: 20px;
+            z-index: 1000;                              /* 堆疊順序，設定較高以確保選單位於最上層 */
+            box-shadow:  0 0 15px 0 #00000047;
+        }
+
+        .menu-item { /* 選項樣式 */
+            list-style-type: none;          /* 移除預設符號 */
+            text-align: center;
+        }
+    
+        .menu-item a { /* 選項連結樣式 */
+            font-size: 18px;         
+            margin: 10px;
+            text-decoration: none;          /* 移除連結底線 */
+            color: rgb(0, 13, 189);                 /* 文字顏色 */
+        }
+
+        .menu-item a:hover { /* 當滑鼠移至選項上時，文字會變成粗體紅色 */
+            font-weight: bold;
+            color: rgb(255, 0, 0);
+        }
+
+        /*  以下 為 1-2-課程單元  */
+        .homePage #tips {
+        padding: 100px 0;
+        background: fixed center/contain white url("../img/wpitem_pic_89596.png") no-repeat;
+        }
+        .homePage #tips .row div .card.bgImg {
+        position: relative;
+        z-index: 1;
+        background: center/cover;
+        aspect-ratio: 2/3;
+        }
+        .homePage #tips .row div .card.bgImg::before {
+        position: absolute;
+        inset: 0;
+        margin: 0 auto;
+        translate: 0 -50%;
+        content: attr(data-tip);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30%;
+        aspect-ratio: 1;
+        background: rgb(255, 225, 225);
+        border-radius: 50%;
+        color: rgb(255, 0, 0);
+        font: 1.8rem/1 "huninn";
+        font-weight: 900;
+        }
+        @media screen and (min-width: 768px) and (max-width: 991px) {
+        .homePage #tips .row div .card.bgImg::before {
+            width: 35%;
+            font-size: 1rem;
+        }
+        }
+        .homePage #tips .row div .card.bgImg h2 {
+        position: absolute;
+        inset: 0;
+        margin: 0;
+        display: none;
+        pointer-events: none;
+        background: rgb(154, 12, 12);
+        opacity: 0.8;
+        color: #ffffff;
+        font: 1.25rem/1 normal;
+        z-index: -1;
+        font-family: "huninn";
+        }
+        @media (hover: hover) {
+        .homePage #tips .row div .card.bgImg:hover h2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        }
+        .homePage #tips .row div:nth-of-type(1) .card.bgImg {
+            background-image: url("/project-VLLV/Member-Only/img/S-1-A.jpg");
+        }
+        .homePage #tips .row div:nth-of-type(2) .card.bgImg {
+            background-image: url("/project-VLLV/Member-Only/img/S-1-D.jpg");
+        }
+        .homePage #tips .row div:nth-of-type(3) .card.bgImg {
+            background-image: url("/project-VLLV/Member-Only/img/S-1-C.JPG");
+        }
+    </style>
+</head>
+<body class="homePage" style="background-color: #FFC7C2;">
+    <!-- 頁首：Logo 與 選單 -->
+    <section id="s-6-2-0" class="container-fluid">
+        <nav class="my-navbar my-navbar__expand--md">
+            <div class="container d-flex justify-content-between">
+                <div class="d-flex column-gap-2">
+                    <a href="/SPA-for-all.html" style="display: flex; align-items: center;"><img
+                            style="width: 60px; border-radius: 50%" src="img/logo-w-401.jpg"></a>
+                    <p class="text-left"
+                        style="color: rgb(70, 70, 216); font-size: 20px; padding-top: 20px; padding-bottom: 0; z-index: 2;">
+                        會員專區/ 課程介紹</p>
+                </div>
+                <div class="my-navbar__collapse">
+                    <ul>
+                        <li><a aria-current="page" href="#changing" >1-1-課程演變</a></li>
+                        <li><a aria-current="page" href="#tips"     >1-2-課程單元</a></li>
+                        <li><a href="#S-3"                          >1-3-活動規劃</a></li>
+                        <li><a href="0-memberOnly.html"             >會員專區</a></li>
+                        <li><a href="/project-VLLV/SPA-for-all.html">網站首頁</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </section>
+    <div style="position: absolute; inset: 0; z-index:999;height:100vh; pointer-events: none;" id="navbarBro"></div>
+    <div class="banner d-flex flex-center">
+        <svg width="0" height="0">
+            <defs>
+                <clipPath id="bannerClip" clipPathUnits="objectBoundingBox">
+                    <path d="M0 0 V0.75 C0.2 1,0.8 1,1 0.75 V0 z" />
+                </clipPath>
+            </defs>
+        </svg>
+    </div>
+    <!--  粉紅圓球 及 垂直方向跑馬燈文字   -->
+    <section class="position-center-bottom pb-5" id="news" style="width: 30%;">
+        <div class="rounded-circle d-flex flex-column justify-content-center align-items-center"
+            style="box-shadow: 0 0 50px -30px black; background-image: linear-gradient(-45deg, #ed6ea0 0%, #FFA99F 100%); aspect-ratio: 1; filter: saturate(1.8) hue-rotate(20deg); height: 100%;">
+            <h2 class="text-light fs-3 text-center m-0">課程緣起</h2>
+            <ul class='vSlider'><div id="newsSlider" class="slider" style="flex-grow: 1 0 100%;"></div></ul>
+            <h2 class="m-0 ms-auto me-auto" style="width:fit-content"><a href="./news.html" id="moreNews"
+                class="text-light fs-3 ps-3 pe-3 pb-2 border-bottom border-2 border-light">瞭解更多</a></h2>
+        </div>
+        <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="shopListOffcanvas" aria-labelledby="shopListOffcanvasLabel" style="display: none;">
+            <ul class="mb-5" id="shopList"></ul>
+        </div>
+    </section>
+    <!-- 將 選單 固定在 右側  -->
+    <section>
+        <div class="menu-container">
+            <ul class="menu m-0 pt-2 pb-2 ps-0">
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#changing"                     >1-1<br>課程<br>演變</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#tips"                         >1-2<br>課程<br>單元</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="#S-3"                          >1-3<br>活動<br>規劃</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="0-memberOnly.html"             >會員<br>專區</a></li>
+                <li class="menu-item"><a class="nav-link active" aria-current="page" href="/project-VLLV/SPA-for-all.html">網站<br>首頁</a></li>
+            </ul>
+        </div>
+    </section>
+    <!--   1-1-課程演變 : 自動輪播 六代差異   -->
+    <section id="changing">
+        <h1 class="text-uppercase text-left fs-1 fw-bold user-select-none" 
+            style="text-shadow: 0px 2px 2.5px; color: rgb(211, 42, 42); padding-top: 30px; padding-left: 100px;">課程演變</h1>
+        <div class="container-fluid" style="background-color: #FFC7C2;">     
+            <div class="container" style="width: 1200px; padding-bottom: 20px;">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+                    <!-- 下方 六個按鈕，分別對應 輪播中的六張圖片 -->
+                    <div id="carouselExampleCaptions" class="carousel slide">
+                        <div class="carousel-indicators" style="margin-bottom: -30px;">       
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" 
+                                    class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                                    aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                                    aria-label="Slide 3"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+                                    aria-label="Slide 4"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4"
+                                    aria-label="Slide 5"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5"
+                                    aria-label="Slide 6"></button>
+                        </div>
+                        <div class="carousel-inner" style="border-radius: 5%;">
+                            <div class="carousel-item active" style="background-image: url(/project-VLLV/Member-Only/img/S-1-1-G1.png); 
+                                 height: 80vh; background-size: cover; background-position: center;"></div>      
+                            <div class="carousel-item" style="background-image: url(/project-VLLV/Member-Only/img/S-1-1-G2.png); 
+                                 height: 80vh; background-size: cover; background-position: center;"></div>        
+                            <div class="carousel-item" style="background-image: url(/project-VLLV/Member-Only/img/S-1-1-G3.png); 
+                                 height: 80vh; background-size: cover; background-position: center;"></div>       
+                            <div class="carousel-item" style="background-image: url(/project-VLLV/Member-Only/img/S-1-1-G4.png); 
+                                 height: 80vh; background-size: cover; background-position: center;"></div>     
+                            <div class="carousel-item" style="background-image: url(/project-VLLV/Member-Only/img/S-1-1-G5.png); 
+                                 height: 80vh; background-size: cover; background-position: center;"></div>
+                            <div class="carousel-item" style="background-image: url(/project-VLLV/Member-Only/img/S-1-1-G6.png); 
+                                 height: 80vh; background-size: cover; background-position: center;"></div>                          
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div> 
+            </div>         
+        </div>
+    </section>
+    <!--   1-2-課程單元   -->
+    <section id="tips" style="clip-path: url(#tipsClip); background-color: #FFC7C2;">
+        <h1 class="text-uppercase text-left fs-1 fw-bold user-select-none" 
+            style="text-shadow: 0px 2px 2.5px; color: rgb(211, 42, 42); padding-left: 100px; margin-top: -20px;">課程單元</h1>
+        <div class="container">
+            <div class="row m-auto" id="tipsList">
+                <div class="col-md-4 mt-5">
+                    <div class="invisible card bgImg border-0 animate__animated" data-tip="Part １">
+                        <h2 class="p-5 text-left user-select-none" style="line-height: 1.3;"><br>
+                            單元 01：認識自己 欣賞同學<br>
+                            《About me關於我》<br>
+                            《分組意向 調查表》<br>
+                            《我 欣賞 哪一型》<br>
+                            《誰是 我的麻吉》<br><br>
+
+                            單元 02：分組競賽 學習聆聽<br>
+                            《各組成員分工職掌》<br>
+                            《分組競賽 裁判筆記》<br><br>
+
+                            單元 03：告白追求 有經驗嗎<br>
+                            《告白的經驗》<br>
+                            《追求的行為》<br><br>
+
+                            單元 04：收送禮物 大有學問<br>
+                            《禮物的收送》<br><br>
+
+                            單元 05：如何告白 如何拒絕<br>
+                            《合宜的告白》</h2>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-5">
+                    <div class="invisible card bgImg border-0 animate__animated animate__delay-1s"
+                        data-tip="Part ２">
+                        <h2 class="p-5 text-left user-select-none" style="line-height: 1.3;"><br>
+                            單元 06：愛 需要學習<br>
+                            《談情說愛》<br>
+                            《愛的典範》<br>
+                            《五種愛之語》<br>
+                            《擁有「愛」的能力》<br>
+                            《恐怖情人》<br><br>
+
+                            單元 07：失戀疫苗 是什麼？<br>
+                            《疫苗的原理》<br>
+                            《失戀疫苗 的 5W》<br><br>
+
+                            單元 08：練習告白 對象調查<br>
+                            《寫出 六個 告白對象志願》<br>
+                            《報名 友愛同學勇氣獎》<br><br>
+
+                            單元 09：<br>
+                            合宜的告白 分組競演<br>
+                            《發揮創意 的 劇本》<br>
+                            《甩掉偶包 的 演出》</h2>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-5">
+                    <div class="invisible card bgImg border-0 animate__animated animate__delay-2s"
+                        data-tip="Part３">
+                        <h2 class="p-5 text-left user-select-none" style="line-height: 1.3;"><br>
+                            單元 10：接種 流程說明<br>
+                            《畢業考 結束後 要告白》<br>
+                            《畢業典禮 前 被拒絕》<br><br>
+
+                            單元 11：啦啦隊競賽 演練<br>
+                            《想出 本組的口號》<br>
+                            《選出 本斑的隊長》<br>
+                            《決定 本斑的口號》<br><br>
+
+                            甄選：友愛同學勇氣獎 得獎人<br>
+                            《候選人 服務意向調查》<br><br>
+
+                            畢業考結束後、畢業典禮前：<br>
+                            【告白練習】全年級 <br>
+                            &emsp;接種一劑 失戀疫苗<br>
+                            【班際 啦啦隊競賽】<br>
+                            【填寫 課程暨活動 回饋單】<br>
+                            【頒獎】<br>
+                            &emsp;最佳劇本獎、同學眼中的我<br>
+                            &emsp;友愛同學獎、啦啦隊競賽獎</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex" id="counterWrap"></div>
+
+    </section>
+    <!--   1-3-活動規劃   -->
+    <section id="S-3" style="clip-path: url(#tipsClip); background-color: #FFC7C2;">
+        <h1 class="text-uppercase text-left fs-1 fw-bold user-select-none" 
+            style="text-shadow: 0px 2px 2.5px; color: rgb(211, 42, 42); padding-left: 100px; margin-top: -20px;">活動規劃</h1>
+        <div class="container">
+            <div class="row m-auto" id="tipsList">
+                <div class="col-md-4 mt-5">
+                    <div class="invisible card bgImg border-0 animate__animated" data-tip="Part １">
+                        <h2 class="p-5 text-left user-select-none" style="line-height: 1.3;"><br>
+                            單元 01：認識自己 欣賞同學<br>
+                            《About me關於我》<br>
+                            《分組意向 調查表》<br>
+                            《我 欣賞 哪一型》<br>
+                            《誰是 我的麻吉》<br><br>
+
+                            單元 02：分組競賽 學習聆聽<br>
+                            《各組成員分工職掌》<br>
+                            《分組競賽 裁判筆記》<br><br>
+
+                            單元 03：告白追求 有經驗嗎<br>
+                            《告白的經驗》<br>
+                            《追求的行為》<br><br>
+
+                            單元 04：收送禮物 大有學問<br>
+                            《禮物的收送》<br><br>
+
+                            單元 05：如何告白 如何拒絕<br>
+                            《合宜的告白》</h2>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-5">
+                    <div class="invisible card bgImg border-0 animate__animated animate__delay-1s"
+                        data-tip="Part ２">
+                        <h2 class="p-5 text-left user-select-none" style="line-height: 1.3;"><br>
+                            單元 06：愛 需要學習<br>
+                            《談情說愛》<br>
+                            《愛的典範》<br>
+                            《五種愛之語》<br>
+                            《擁有「愛」的能力》<br>
+                            《恐怖情人》<br><br>
+
+                            單元 07：失戀疫苗 是什麼？<br>
+                            《疫苗的原理》<br>
+                            《失戀疫苗 的 5W》<br><br>
+
+                            單元 08：練習告白 對象調查<br>
+                            《寫出 六個 告白對象志願》<br>
+                            《報名 友愛同學勇氣獎》<br><br>
+
+                            單元 09：<br>
+                            合宜的告白 分組競演<br>
+                            《發揮創意 的 劇本》<br>
+                            《甩掉偶包 的 演出》</h2>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-5">
+                    <div class="invisible card bgImg border-0 animate__animated animate__delay-2s"
+                        data-tip="Part３">
+                        <h2 class="p-5 text-left user-select-none" style="line-height: 1.3;"><br>
+                            單元 10：接種 流程說明<br>
+                            《畢業考 結束後 要告白》<br>
+                            《畢業典禮 前 被拒絕》<br><br>
+
+                            單元 11：啦啦隊競賽 演練<br>
+                            《想出 本組的口號》<br>
+                            《選出 本斑的隊長》<br>
+                            《決定 本斑的口號》<br><br>
+
+                            甄選：友愛同學勇氣獎 得獎人<br>
+                            《候選人 服務意向調查》<br><br>
+
+                            畢業考結束後、畢業典禮前：<br>
+                            【告白練習】全年級 <br>
+                            &emsp;接種一劑 失戀疫苗<br>
+                            【班際 啦啦隊競賽】<br>
+                            【填寫 課程暨活動 回饋單】<br>
+                            【頒獎】<br>
+                            &emsp;最佳劇本獎、同學眼中的我<br>
+                            &emsp;友愛同學獎、啦啦隊競賽獎</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!--   頁尾：版權宣告   -->
+    <footer>
+        <h5 class="fs-4 text-end" style="margin-top: 20px; padding: 20px; color: beige;">design & setup by the Team of VLlV 2024.3.9</h5>
+    </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
+    <script src="./js/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
